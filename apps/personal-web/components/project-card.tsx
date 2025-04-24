@@ -45,12 +45,12 @@ export function ProjectCard({ project }: ProjectCardProps) {
         <p className="text-sm text-muted-foreground mb-4">{project.description}</p>
         <div className="flex justify-between">
           <Button variant="outline" size="sm" className="rounded-3xl" asChild>
-            <Link href={project.github}>
+            <Link href={project.github} target="_blank">
               <Github className="mr-1 h-3 w-3" /> Code
             </Link>
           </Button>
           <Button variant="outline" size="sm" className="rounded-3xl" asChild>
-            <Link href={project.demo}>
+            <Link href={project.demo} target="_blank">
               <ExternalLink className="mr-1 h-3 w-3" /> Demo
             </Link>
           </Button>

@@ -4,7 +4,7 @@ import type React from "react"
 import { useState, useEffect, useCallback } from "react"
 import { usePathname } from "next/navigation"
 import Link from "next/link"
-import { Menu, X, Wallet, Cpu, Layers } from "lucide-react"
+import { Menu, X, Wallet, Cpu, Mail } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
 import { navItems } from "@/data/navigation"
@@ -55,23 +55,37 @@ export function DashboardLayout({ children }: { children: React.ReactNode }) {
                 <Cpu className="w-8 h-8 text-primary" />
               </div>
             </div>
-            <h2 className="text-xl font-bold text-center glow-text mb-1">CYBER_DEV</h2>
-            <p className="text-xs text-center text-muted-foreground">Web3 Developer</p>
+            <h2 className="text-xl font-bold text-center glow-text mb-1">Jake Kuo</h2>
+            <p className="text-xs text-center text-muted-foreground">XuoDAO Builder Team</p>
+            <p className="text-xs text-center text-muted-foreground">Fullstack engineer</p>
             <div className="flex justify-center mt-3 space-x-2">
-              <Button
-                variant="outline"
-                size="icon"
-                className="rounded-full h-8 w-8 bg-muted/50 border-primary/30 hover:border-primary"
-              >
-                <Wallet className="h-4 w-4" />
-              </Button>
-              <Button
-                variant="outline"
-                size="icon"
-                className="rounded-full h-8 w-8 bg-muted/50 border-secondary/30 hover:border-secondary"
-              >
-                <Layers className="h-4 w-4" />
-              </Button>
+              <Link href='https://etherscan.io/address/0x314d66D77AD35e65D1D7CdB5c82F51B2792b91c4' target="_blank">
+                <Button
+                  variant="outline"
+                  size="icon"
+                  className="rounded-full h-8 w-8 bg-muted/50 border-primary/30 hover:border-primary group"
+                  title="View on Etherscan"
+                >
+                  <Wallet className="h-4 w-4" />
+                  <span className="absolute -top-8 bg-black/80 backdrop-blur-sm px-2 py-1 rounded-md text-xs text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity duration-200 border border-primary/20 glow-text">
+                    View on Etherscan
+                  </span>
+                </Button>
+              </Link>
+
+              <Link href="mailto:jake0627a1@gmail.com" target="_blank">
+                <Button
+                  variant="outline"
+                  size="icon"
+                  className="rounded-full h-8 w-8 bg-muted/50 border-secondary/30 hover:border-secondary group"
+                  title="Send Email"
+                >
+                  <Mail className="h-4 w-4" />
+                  <span className="absolute -top-8 bg-black/80 backdrop-blur-sm px-2 py-1 rounded-md text-xs text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity duration-200 border border-secondary/20 glow-text">
+                    Send Email
+                  </span>
+                </Button>
+              </Link>
             </div>
           </div>
 
@@ -100,8 +114,7 @@ export function DashboardLayout({ children }: { children: React.ReactNode }) {
           {/* Footer */}
           <div className="p-4 border-t border-primary/20">
             <div className="text-xs text-center text-muted-foreground">
-              <p>v1.0.0</p>
-              <p className="mt-1">© 2025 CYBER_DEV</p>
+              <p className="mt-1">© 2025 JakeKuo All right reserved.</p>
             </div>
           </div>
         </div>

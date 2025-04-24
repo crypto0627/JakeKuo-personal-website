@@ -11,9 +11,9 @@ const jetbrainsMono = JetBrains_Mono({
 })
 
 export const metadata: Metadata = {
-  title: "Cyberpunk Resume",
-  description: "Personal resume website with Web3 cyberpunk aesthetic",
-    generator: 'v0.dev'
+  title: "JakeKuo",
+  description: "Personal resume website",
+  authors: [{name: 'JakeKuo', url: 'https://github.com/crypto0627'}],
 }
 
 export default function RootLayout({
