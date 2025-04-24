@@ -4,11 +4,12 @@ import { useState, useMemo } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { Download, FileText, Globe, Github } from "lucide-react"
+import { Download, FileText, Github, Linkedin, Send } from "lucide-react"
 import { CyberAvatar } from "@/components/ui/cyber-avatar"
 import { StatsBar } from "@/components/ui/stats-bar"
 import { ProjectCard } from "@/components/project-card"
 import { featuredProjects, allProjects } from "@/data/projects"
+import Link from "next/link"
 
 export function HomeContent() {
   const [activeTab, setActiveTab] = useState<string>("featured")
@@ -26,19 +27,24 @@ export function HomeContent() {
         </div>
 
         <div className="relative z-10 flex flex-col md:flex-row items-center md:items-start gap-8">
-          <CyberAvatar src="/placeholder.svg?height=200&width=200" alt="CYBER_DEV Avatar" id="0xC7B3R" />
+          <div className="group relative">
+            <CyberAvatar src="/laihung.webp?height=200&width=200" alt="Avatar" id="jakekuo.eth" />
+            <span className="absolute -top-8 left-1/2 -translate-x-1/2 bg-black/80 backdrop-blur-sm px-2 py-1 rounded-md text-xs text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity duration-200 border border-primary/20 glow-text">
+              View on Ethereum
+            </span>
+          </div>
 
           <div className="max-w-3xl">
             <h1 className="text-4xl md:text-5xl font-bold mb-4 text-center md:text-left">
-              <span className="glitch" data-text="CYBER_DEV">
-                CYBER_DEV
+              <span className="text-white font-bold text-6xl" data-text="CYBER_DEV">
+                Jake Kuo
               </span>
             </h1>
             <h2 className="text-2xl md:text-3xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-primary via-secondary to-accent text-center md:text-left">
-              Web3 Developer & Blockchain Engineer
+              Web3 Developer & FullStack Engineer
             </h2>
             <p className="text-lg text-muted-foreground mb-8 text-center md:text-left">
-              Building the decentralized future with cutting-edge Web3 technologies. Specialized in smart contracts,
+              Building the decentralized future with cutting-edge Web3 technologies. Specialized in Payment,
               DeFi protocols, and immersive dApp experiences.
             </p>
 
@@ -49,13 +55,13 @@ export function HomeContent() {
               <div className="flex gap-2">
                 <Button
                   variant="outline"
-                  className="rounded-3xl border-secondary/50 hover:border-secondary text-secondary hover:text-secondary glow-cyan"
+                  className="rounded-3xl border-secondary/50 hover:border-secondary hover:bg-secondary/20 text-secondary hover:text-secondary glow-cyan"
                 >
                   <FileText className="mr-2 h-4 w-4" /> 繁體中文
                 </Button>
                 <Button
                   variant="outline"
-                  className="rounded-3xl border-accent/50 hover:border-accent text-accent hover:text-accent glow-pink"
+                  className="rounded-3xl border-accent/50 hover:border-accent hover:bg-accent/20 text-accent hover:text-accent glow-pink"
                 >
                   <FileText className="mr-2 h-4 w-4" /> 简体中文
                 </Button>
@@ -74,28 +80,28 @@ export function HomeContent() {
               <h3 className="text-xl font-bold mb-4 text-primary glow-text">Quick Stats</h3>
 
               <div className="space-y-4">
-                <StatsBar label="Experience" value="5+ Years" percentage={85} color="primary" />
-                <StatsBar label="Projects" value="20+" percentage={75} color="secondary" />
-                <StatsBar label="Clients" value="15+" percentage={65} color="accent" />
+                <StatsBar label="Fullstack Experience" value="2+ Years" percentage={100} color="primary" />
+                <StatsBar label="Web3 Hackathon" value="10+" percentage={100} color="secondary" />
+                <StatsBar label="Repositories" value="15+" percentage={100} color="accent" />
               </div>
 
               <div className="mt-6 pt-6 border-t border-primary/20">
                 <h4 className="text-lg font-bold mb-3">Top Skills</h4>
                 <div className="flex flex-wrap gap-2">
                   <Badge variant="outline" className="bg-primary/10 text-primary border-primary/30">
-                    Solidity
+                    React/Next.js
                   </Badge>
                   <Badge variant="outline" className="bg-secondary/10 text-secondary border-secondary/30">
-                    React
+                    Typescript
                   </Badge>
                   <Badge variant="outline" className="bg-accent/10 text-accent border-accent/30">
                     Web3.js
                   </Badge>
                   <Badge variant="outline" className="bg-primary/10 text-primary border-primary/30">
-                    Smart Contracts
+                    Node.js
                   </Badge>
                   <Badge variant="outline" className="bg-secondary/10 text-secondary border-secondary/30">
-                    DeFi
+                    Solidity
                   </Badge>
                 </div>
               </div>
@@ -106,15 +112,21 @@ export function HomeContent() {
             <CardContent className="p-6">
               <h3 className="text-xl font-bold mb-4 text-primary glow-text">Connect</h3>
               <div className="grid grid-cols-2 gap-3">
-                <Button variant="outline" className="rounded-3xl border-primary/30 hover:border-primary">
-                  <Github className="mr-2 h-4 w-4" /> GitHub
-                </Button>
-                <Button variant="outline" className="rounded-3xl border-secondary/30 hover:border-secondary">
-                  <Globe className="mr-2 h-4 w-4" /> Website
-                </Button>
-                <Button variant="outline" className="rounded-3xl border-accent/30 hover:border-accent col-span-2">
-                  <Download className="mr-2 h-4 w-4" /> Download Full CV
-                </Button>
+                <Link href="https://github.com/crypto0627" target="_blank" className="w-full">
+                  <Button variant="outline" className="rounded-3xl border-primary/30 hover:border-primary w-full">
+                    <Github className="mr-2 h-4 w-4" /> GitHub
+                  </Button>
+                </Link>
+                <Link href="https://www.linkedin.com/in/laihong-kuo-83b186245" target="_blank" className="w-full">
+                  <Button variant="outline" className="rounded-3xl border-secondary/30 hover:border-secondary w-full">
+                    <Linkedin className="mr-2 h-4 w-4" /> LinkedIn
+                  </Button>
+                </Link>
+                <Link href="https://t.me/JakeKuo" target="_blank" className="w-full col-span-2">
+                  <Button variant="outline" className="rounded-3xl border-accent/30 hover:border-accent w-full">
+                    <Send className="mr-2 h-4 w-4" /> Telegram
+                  </Button>
+                </Link>
               </div>
             </CardContent>
           </Card>

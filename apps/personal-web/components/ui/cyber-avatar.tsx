@@ -40,8 +40,15 @@ export function CyberAvatar({ src, alt, size = "md", id, className, progressValu
         </div>
       </div>
       {id && (
-        <div className="absolute -bottom-2 -right-2 bg-black/80 border border-primary/30 rounded-lg px-2 py-1 text-xs font-mono text-primary">
-          ID: {id}
+        <div className="absolute -bottom-2 -right-2 bg-black/80 border border-primary/30 rounded-lg px-2 py-2 text-sm font-bold text-primary">
+         <a 
+           href='https://etherscan.io/address/0x314d66D77AD35e65D1D7CdB5c82F51B2792b91c4' 
+           target="_blank" 
+           rel="noopener noreferrer"
+           className="hover:text-primary/80 transition-colors"
+         >
+           ENS: {id}
+         </a>
         </div>
       )}
     </div>
