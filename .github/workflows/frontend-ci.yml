@@ -34,4 +34,4 @@ jobs:
 
       - name: Build frontend
         run: pnpm run build
-        working-directory: apps/frontend
+        working-directory: apps/personal-web
