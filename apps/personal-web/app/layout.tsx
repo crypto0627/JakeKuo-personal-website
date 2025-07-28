@@ -12,9 +12,35 @@ const jetbrainsMono = JetBrains_Mono({
 })
 
 export const metadata: Metadata = {
-  title: "JakeKuo",
+  title: "JakeKuo 郭來鴻",
   description: "Personal resume website",
-  authors: [{name: 'JakeKuo', url: 'https://github.com/crypto0627'}],
+  authors: [{ name: 'JakeKuo', url: 'https://github.com/crypto0627' }],
+  keywords: [
+    "JakeKuo",
+    "郭來鴻",
+    "Web3",
+    "Blockchain",
+    "Full Stack",
+    "Software Engineer",
+    "Next.js",
+    "React",
+    "TypeScript",
+    "Personal Website",
+    "Developer",
+    "Portfolio",
+    "Frontend",
+    "Backend",
+    "DApp",
+    "Ethereum",
+    "Stellar",
+    "Pi Network",
+    "Smart Contract",
+    "Taiwan",
+    "NKUST",
+    "Cathay Financial Holdings",
+    "Fortune Electric",
+    "XueDAO"
+  ],
 }
 
 export default function RootLayout({

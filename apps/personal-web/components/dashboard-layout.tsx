@@ -4,7 +4,7 @@ import type React from "react"
 import { useState, useEffect, useCallback } from "react"
 import { usePathname } from "next/navigation"
 import Link from "next/link"
-import { Menu, X, Wallet, Cpu, Mail } from "lucide-react"
+import { Menu, X, Wallet, Bitcoin, Mail } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
 import { navItems } from "@/data/navigation"
@@ -52,7 +52,7 @@ export function DashboardLayout({ children }: { children: React.ReactNode }) {
             <div className="relative w-20 h-20 mx-auto mb-4">
               <div className="absolute inset-0 rounded-full bg-gradient-to-r from-primary to-accent animate-pulse-glow"></div>
               <div className="absolute inset-1 rounded-full bg-black flex items-center justify-center">
-                <Cpu className="w-8 h-8 text-primary" />
+                <Bitcoin className="w-8 h-8 text-primary" />
               </div>
             </div>
             <h2 className="text-xl font-bold text-center glow-text mb-1">Jake Kuo</h2>
@@ -86,6 +86,15 @@ export function DashboardLayout({ children }: { children: React.ReactNode }) {
                   </span>
                 </Button>
               </Link>
+            </div>
+            <div className="flex justify-center text-center mt-3">
+              <a
+                href="mailto:jake0627a1@gmail.com"
+                className="text-primary hover:underline"
+                title="Mail me"
+              >
+                jake0627a1@gmail.com
+              </a>
             </div>
           </div>
 

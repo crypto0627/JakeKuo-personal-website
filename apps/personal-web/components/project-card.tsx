@@ -21,7 +21,7 @@ interface ProjectCardProps {
 
 export function ProjectCard({ project }: ProjectCardProps) {
   return (
-    <Card className="rounded-3xl border border-primary/20 bg-black/60 backdrop-blur-sm overflow-hidden hover:glow transition-all duration-300">
+    <Card className="rounded-3xl border border-primary/20 bg-black/60 backdrop-blur-sm overflow-hidden hover:glow transition-all duration-300 flex flex-col">
       <div className="relative h-48 w-full overflow-hidden">
         <Image
           src={project.image || "/placeholder.svg"}
@@ -41,9 +41,10 @@ export function ProjectCard({ project }: ProjectCardProps) {
           </div>
         </div>
       </div>
-      <CardContent className="p-4">
+      <CardContent className="p-4 flex flex-col flex-1">
         <p className="text-sm text-muted-foreground mb-4">{project.description}</p>
-        <div className="flex justify-between">
+        <div className="flex-1" />
+        <div className="flex justify-between mt-2">
           <Button variant="outline" size="sm" className="rounded-3xl" asChild>
             <Link href={project.github} target="_blank">
               <Github className="mr-1 h-3 w-3" /> Code

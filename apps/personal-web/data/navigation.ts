@@ -9,24 +9,14 @@ export interface NavItem {
 
 export const navItems: NavItem[] = [
   {
-    title: "Home",
-    href: "/",
-    icon: Home,
-  },
-  {
     title: "Summary",
-    href: "/summary",
+    href: "/",
     icon: User,
   },
   {
     title: "Experience",
     href: "/experience",
     icon: Briefcase,
-  },
-  {
-    title: "Skills",
-    href: "/skills",
-    icon: Code2,
   },
   {
     title: "Education",
