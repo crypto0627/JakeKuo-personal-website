@@ -29,7 +29,7 @@ export function HomeContent() {
         </div>
 
         <div className="relative z-10 flex flex-col md:flex-row items-center md:items-start gap-8">
-          <div className="group relative">
+          <div className="group relative w-full md:w-auto flex flex-col items-center">
             <CyberAvatar src="/JakeKuo.png?height=200&width=200" alt="Avatar" id="jakekuo.eth" />
             <span className="absolute -top-8 left-1/2 -translate-x-1/2 bg-black/80 backdrop-blur-sm px-2 py-1 rounded-md text-xs text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity duration-200 border border-primary/20 glow-text pointer-events-none"
               style={{
@@ -39,66 +39,84 @@ export function HomeContent() {
             >
               View on Ethereum
             </span>
-
-            <div className="absolute left-0 top-full mt-3 flex flex-col items-start gap-2">
-              <Link
-                href="https://www.linkedin.com/company/fortune-electric/posts/?feedView=all"
-                target="_blank"
-                className="w-full"
-                tabIndex={-1}
-                aria-label="View Fortune on LinkedIn"
-              >
-                <div
-                  className="flex items-center gap-2 px-3 py-1 rounded-full bg-gradient-to-r from-primary/20 via-black/60 to-accent/20 shadow-lg backdrop-blur-md relative cursor-pointer"
-                  onMouseEnter={() => setHovered("company")}
-                  onMouseLeave={() => setHovered("none")}
-                  style={{
-                    pointerEvents: hovered === "organization" ? "none" : undefined,
-                    opacity: hovered === "organization" ? 0.5 : 1,
-                  }}
+            
+            {/* Company & Organization: Responsive layout */}
+            <div
+              className="
+                mt-3
+                flex flex-col
+                items-center
+                gap-2
+                w-full
+                sm:w-max
+                md:absolute md:left-0 md:translate-x-0 md:top-full
+                md:flex-col md:items-start
+                md:w-auto
+                md:gap-2
+                relative
+                z-20
+              "
+            >
+              <div className="flex flex-col sm:flex-row md:flex-col gap-2 w-full sm:w-auto">
+                <Link
+                  href="https://www.linkedin.com/company/fortune-electric/posts/?feedView=all"
+                  target="_blank"
+                  className="w-full sm:w-auto"
+                  tabIndex={-1}
+                  aria-label="View Fortune on LinkedIn"
                 >
-                  <span className="text-xs font-semibold text-primary flex items-center">
-                    <svg className="w-3 h-3 mr-1 text-primary" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a6 6 0 016 6c0 4.418-6 10-6 10S4 12.418 4 8a6 6 0 016-6zm0 8a2 2 0 100-4 2 2 0 000 4z"/></svg>
-                    Company
-                  </span>
-                  <div className="flex-1 flex justify-end">
-                    <Badge variant="outline" className="bg-primary/10 text-primary px-3 py-0.5 text-xs font-medium shadow-sm ml-2">
-                      Fortune
-                    </Badge>
+                  <div
+                    className="flex items-center gap-2 px-3 py-1 rounded-full bg-gradient-to-r from-primary/20 via-black/60 to-accent/20 shadow-lg backdrop-blur-md relative cursor-pointer min-w-[140px] w-full sm:w-auto"
+                    onMouseEnter={() => setHovered("company")}
+                    onMouseLeave={() => setHovered("none")}
+                    style={{
+                      pointerEvents: hovered === "organization" ? "none" : undefined,
+                      opacity: hovered === "organization" ? 0.5 : 1,
+                    }}
+                  >
+                    <span className="text-xs font-semibold text-primary flex items-center">
+                      <svg className="w-3 h-3 mr-1 text-primary" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a6 6 0 016 6c0 4.418-6 10-6 10S4 12.418 4 8a6 6 0 016-6zm0 8a2 2 0 100-4 2 2 0 000 4z"/></svg>
+                      Company
+                    </span>
+                    <div className="flex-1 flex justify-end">
+                      <Badge variant="outline" className="bg-primary/10 text-primary px-3 py-0.5 text-xs font-medium shadow-sm ml-2">
+                        Fortune
+                      </Badge>
+                    </div>
                   </div>
-                </div>
-              </Link>
-              <Link
-                href="https://www.linkedin.com/company/xuedao/posts/?feedView=all"
-                target="_blank"
-                className="w-full"
-                tabIndex={-1}
-                aria-label="View XueDAO on LinkedIn"
-              >
-                <div
-                  className="flex items-center gap-2 px-3 py-1 rounded-full bg-gradient-to-r from-accent/20 via-black/60 to-secondary/20 shadow-lg backdrop-blur-md relative cursor-pointer"
-                  onMouseEnter={() => {
-                    if (hovered !== "company") setHovered("organization")
-                  }}
-                  onMouseLeave={() => {
-                    if (hovered === "organization") setHovered("none")
-                  }}
-                  style={{
-                    pointerEvents: hovered === "company" ? "none" : undefined,
-                    opacity: hovered === "company" ? 0.5 : 1,
-                  }}
+                </Link>
+                <Link
+                  href="https://www.linkedin.com/company/xuedao/posts/?feedView=all"
+                  target="_blank"
+                  className="w-full sm:w-auto"
+                  tabIndex={-1}
+                  aria-label="View XueDAO on LinkedIn"
                 >
-                  <span className="text-xs font-semibold text-accent flex items-center">
-                    <svg className="w-3 h-3 mr-1 text-accent" fill="currentColor" viewBox="0 0 20 20"><path d="M13 7H7v6h6V7z"/><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm-3-9a1 1 0 011-1h4a1 1 0 011 1v4a1 1 0 01-1 1H8a1 1 0 01-1-1V9z" clipRule="evenodd"/></svg>
-                    Organization
-                  </span>
-                  <div className="flex-1 flex justify-end">
-                    <Badge variant="outline" className="bg-accent/10 text-accent px-3 py-0.5 text-xs font-medium shadow-sm ml-2">
-                      XueDAO
-                    </Badge>
+                  <div
+                    className="flex items-center gap-2 px-3 py-1 rounded-full bg-gradient-to-r from-accent/20 via-black/60 to-secondary/20 shadow-lg backdrop-blur-md relative cursor-pointer min-w-[140px] w-full sm:w-auto"
+                    onMouseEnter={() => {
+                      if (hovered !== "company") setHovered("organization")
+                    }}
+                    onMouseLeave={() => {
+                      if (hovered === "organization") setHovered("none")
+                    }}
+                    style={{
+                      pointerEvents: hovered === "company" ? "none" : undefined,
+                      opacity: hovered === "company" ? 0.5 : 1,
+                    }}
+                  >
+                    <span className="text-xs font-semibold text-accent flex items-center">
+                      <svg className="w-3 h-3 mr-1 text-accent" fill="currentColor" viewBox="0 0 20 20"><path d="M13 7H7v6h6V7z"/><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm-3-9a1 1 0 011-1h4a1 1 0 011 1v4a1 1 0 01-1 1H8a1 1 0 01-1-1V9z" clipRule="evenodd"/></svg>
+                      Organization
+                    </span>
+                    <div className="flex-1 flex justify-end">
+                      <Badge variant="outline" className="bg-accent/10 text-accent px-3 py-0.5 text-xs font-medium shadow-sm ml-2">
+                        XueDAO
+                      </Badge>
+                    </div>
                   </div>
-                </div>
-              </Link>
+                </Link>
+              </div>
             </div>
           </div>
 
