@@ -1,11 +1,14 @@
+import Image from "next/image"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Briefcase, Calendar } from "lucide-react"
+import { useDuration, formatDuration } from "@/hooks/useDuration"
 
 interface Experience {
   id: number
   role: string
   company: string
+  companyLogo?: string
   period: string
   description: string
   achievements: string[]
@@ -15,42 +18,74 @@ interface Experience {
 const experiences: Experience[] = [
   {
     id: 1,
-    role: "Senior Blockchain Developer",
-    company: "CryptoFuture Labs",
-    period: "2022 - Present",
-    description: "Leading the development of decentralized finance applications and NFT marketplaces.",
+    role: "Full Stack Engineer",
+    company: "Fortune Electric",
+    companyLogo: "https://media.licdn.com/dms/image/v2/C510BAQFG-p-akohg3g/company-logo_200_200/company-logo_200_200/0/1631345703048?e=1756339200&v=beta&t=K0dyC5XE3U1eEAepnHOuoIZCQivmdO_OaHbbCFTozWQ",
+    period: "2025/2/4 - Present",
+    description:
+      "Leading the development of a next-generation Energy Storage and Management System (EMS) for industrial applications, integrating real-time data visualization, smart scheduling, and secure control interfaces.",
     achievements: [
-      "Architected and implemented a cross-chain DeFi protocol that processed over $10M in transactions",
-      "Led a team of 5 developers to deliver a high-performance NFT marketplace",
-      "Optimized smart contracts resulting in 40% reduction in gas costs",
+      "Integrated frontend and backend systems with a unified data flow, enabling real-time monitoring, smart scheduling, and secure control in the EMS microservice architecture.",
+      "Led the end-to-end planning, design, and development of the department's official website, EMS, and SCADA systems; established knowledge management platforms by integrating GitHub, open-source projects (e.g., BookStack), and Notion-based KM systems; implemented comprehensive software engineering processes and CI/CD pipelines.",
+      "Developed a dashboard demo for solar energy storage scheduling and behind-the-meter energy storage management.",
     ],
-    technologies: ["Solidity", "React", "TypeScript", "Ethers.js", "The Graph", "IPFS"],
+    technologies: [
+      "TypeScript",
+      "React19/Vue3/Next.js",
+      "Node.js/Express",
+      "Tailwindcss",
+      "Model Context Protocol",
+      "Microservice",
+      "Docker/Docker Compose/Kubernetes/Helm",
+      "ORM",
+      "SQL/NoSQL",
+      "HTML/CSS/JavaScript",
+    ],
   },
   {
     id: 2,
-    role: "Blockchain Engineer",
-    company: "Web3 Innovations",
-    period: "2020 - 2022",
-    description: "Developed smart contracts and frontend interfaces for various blockchain applications.",
+    role: "Contributor & Frontend Engineer",
+    company: "XueDAO",
+    companyLogo: "https://media.licdn.com/dms/image/v2/D560BAQHshnjgLpF7Jw/company-logo_200_200/company-logo_200_200/0/1713785348690?e=1756339200&v=beta&t=1KFA_hIDguasg2MdCgPr9jdFyooP4qdW65iVeaU3sXA",
+    period: "2024/4/15 - Present",
+    description:
+      "Contributed to Web3 education and open-source development by building community tools, organizing workshops, and participating in hackathons to empower blockchain learners in Taiwan.",
     achievements: [
-      "Built a decentralized identity solution used by 3 enterprise clients",
-      "Implemented ERC-20 and ERC-721 token contracts for multiple projects",
-      "Created a custom wallet integration library adopted by 10+ projects",
+      "Developed and maintained the official XueDAO website.",
+      "Co-organized and facilitated Web3 hackathons and workshops for students and early-stage developers.",
+      "Participated in 10+ Web3 hackathons and workshops, expanding the organization's visibility.",
     ],
-    technologies: ["Solidity", "JavaScript", "Web3.js", "Truffle", "React", "Node.js"],
+    technologies: [
+      "Web3.js/Ether.js/Wagmi",
+      "Wallet Provider",
+      "Remix/Hardhat IDE",
+      "Alchemy/Infura RPC",
+      "IPFS",
+      "Solidity",
+      "ERC-20 721 1155",
+    ],
   },
   {
     id: 3,
-    role: "Frontend Developer",
-    company: "TechSolutions Inc.",
-    period: "2018 - 2020",
-    description: "Developed responsive web applications with focus on user experience and performance.",
+    role: "Blockchain Research Developer Intern",
+    company: "Cathay Financial Holdings",
+    companyLogo: "https://media.licdn.com/dms/image/v2/C4D0BAQHf8hdm_7CuuA/company-logo_200_200/company-logo_200_200/0/1631304615081?e=1756339200&v=beta&t=OXbhTbvGZoMHi9HC_8gMu18FD-9B2VylolZ9SZCwqrk",
+    period: "2023/7/5 - 2024/2/23",
+    description:
+      "Worked on blockchain R&D and frontend development projects, focusing on usability, performance, and integrating Web3 technologies into enterprise-grade applications.",
     achievements: [
-      "Migrated legacy applications to modern React architecture",
-      "Implemented CI/CD pipelines reducing deployment time by 60%",
-      "Developed reusable component library used across multiple projects",
+      "Optimized frontend performance by resolving UI stutter and flickering issues, refactoring asynchronous API logic, and applying lazy loading and debouncing techniques.",
+      "Built a command-line dashboard tool with React Ink for managing Ethereum Quorum nodes and Docker-based blockchain infrastructure for financial institutions.",
+      "Conducted blockchain feasibility studies (Bitcoin, Ethereum, HyperLedger Fabric) for enterprise financial use cases.",
     ],
-    technologies: ["React", "JavaScript", "CSS", "Redux", "Jest", "Webpack"],
+    technologies: [
+      "Blockchain research",
+      "Bitcoin",
+      "Ethereum",
+      "Hyperledger Fabric",
+      "React Ink app",
+      "Cloudflare",
+    ],
   },
 ]
 
@@ -68,51 +103,91 @@ export function ExperienceContent() {
       </div>
 
       <div className="space-y-6">
-        {experiences.map((exp) => (
-          <Card
-            key={exp.id}
-            className="rounded-3xl border border-primary/20 bg-black/60 backdrop-blur-sm overflow-hidden"
-          >
-            <CardHeader className="pb-2">
-              <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+        {experiences.map((exp) => {
+          const duration = useDuration(exp.period)
+          return (
+            <Card
+              key={exp.id}
+              className="rounded-3xl border border-primary/20 bg-black/60 backdrop-blur-sm overflow-hidden"
+            >
+              <CardHeader className="pb-2">
+                <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                  <div className="flex items-center space-x-3">
+                    {exp.companyLogo && (
+                      <div className="relative h-20 w-20">
+                        <Image
+                          src={exp.companyLogo}
+                          alt={`${exp.company} logo`}
+                          fill
+                          className="object-contain p-1"
+                          sizes="40px"
+                        />
+                      </div>
+                    )}
+                    <div>
+                      <CardTitle className="text-xl">{exp.role}</CardTitle>
+                      <p className="text-primary font-medium">{exp.company}</p>
+                    </div>
+                  </div>
+                  <div className="flex flex-col items-start md:items-end text-muted-foreground">
+                    <div className="flex items-center space-x-2">
+                      <Calendar className="h-4 w-4" />
+                      {/* 顯示完整日期 */}
+                      <span>
+                        {(() => {
+                          // period 可能是 "YYYY/M/D - YYYY/M/D" 或 "YYYY/M/D - Present"
+                          // 只顯示 "YYYY/M/D - YYYY/M/D" 或 "YYYY/M/D - Present"
+                          const [start, end] = exp.period.split(" - ").map((s) => s.trim())
+                          function formatDate(str: string) {
+                            const parts = str.split("/")
+                            if (parts.length === 3) {
+                              return `${parts[0]}/${parts[1]}/${parts[2]}`
+                            } else if (parts.length === 2) {
+                              return `${parts[0]}/${parts[1]}`
+                            }
+                            return str
+                          }
+                          return `${formatDate(start)} - ${end === "Present" ? "Present" : formatDate(end)}`
+                        })()}
+                      </span>
+                    </div>
+                    {duration && (
+                      <span className="text-xs mt-1">
+                        {formatDuration(duration)}
+                      </span>
+                    )}
+                  </div>
+                </div>
+              </CardHeader>
+              <CardContent className="pt-4">
+                <p className="mb-4">{exp.description}</p>
+
+                <div className="mb-4">
+                  <h4 className="text-sm font-medium text-muted-foreground mb-2">Key Achievements</h4>
+                  <ul className="space-y-2">
+                    {exp.achievements.map((achievement, index) => (
+                      <li key={index} className="flex items-start space-x-2">
+                        <div className="h-2 w-2 rounded-full bg-primary mt-2"></div>
+                        <span className="flex-1">{achievement}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
                 <div>
-                  <CardTitle className="text-xl">{exp.role}</CardTitle>
-                  <p className="text-primary font-medium">{exp.company}</p>
+                  <h4 className="text-sm font-medium text-muted-foreground mb-2">Technologies</h4>
+                  <div className="flex flex-wrap gap-2">
+                    {exp.technologies.map((tech, index) => (
+                      <Badge key={index} variant="outline" className="bg-primary/10 text-primary border-primary/30">
+                        {tech}
+                      </Badge>
+                    ))}
+                  </div>
                 </div>
-                <div className="flex items-center space-x-2 text-muted-foreground">
-                  <Calendar className="h-4 w-4" />
-                  <span>{exp.period}</span>
-                </div>
-              </div>
-            </CardHeader>
-            <CardContent className="pt-4">
-              <p className="mb-4">{exp.description}</p>
-
-              <div className="mb-4">
-                <h4 className="text-sm font-medium text-muted-foreground mb-2">Key Achievements</h4>
-                <ul className="space-y-2">
-                  {exp.achievements.map((achievement, index) => (
-                    <li key={index} className="flex items-start space-x-2">
-                      <div className="h-2 w-2 rounded-full bg-primary mt-2"></div>
-                      <span className="flex-1">{achievement}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              <div>
-                <h4 className="text-sm font-medium text-muted-foreground mb-2">Technologies</h4>
-                <div className="flex flex-wrap gap-2">
-                  {exp.technologies.map((tech, index) => (
-                    <Badge key={index} variant="outline" className="bg-primary/10 text-primary border-primary/30">
-                      {tech}
-                    </Badge>
-                  ))}
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-        ))}
+              </CardContent>
+            </Card>
+          )
+        })}
       </div>
     </div>
   )
