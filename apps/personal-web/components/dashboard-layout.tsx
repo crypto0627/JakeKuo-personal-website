@@ -1,7 +1,7 @@
 "use client"
 
 import type React from "react"
-import { useState, useEffect, useCallback } from "react"
+import { useState, useEffect, useCallback, useRef } from "react"
 import { usePathname } from "next/navigation"
 import Link from "next/link"
 import { Menu, X, Wallet, Bitcoin, Mail } from "lucide-react"
@@ -14,6 +14,7 @@ export function DashboardLayout({ children }: { children: React.ReactNode }) {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true)
   const isMobile = useMobileDetect()
   const pathname = usePathname()
+  const sidebarRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     if (isMobile) {
@@ -24,8 +25,28 @@ export function DashboardLayout({ children }: { children: React.ReactNode }) {
   }, [isMobile])
 
   const toggleSidebar = useCallback(() => {
-    setIsSidebarOpen(!isSidebarOpen)
-  }, [isSidebarOpen])
+    setIsSidebarOpen((prev) => !prev)
+  }, [])
+
+  // 點擊非sidebar區域會關閉
+  useEffect(() => {
+    if (!isSidebarOpen || !isMobile) return
+
+    function handleClickOutside(event: MouseEvent) {
+      // Only close if click is outside the sidebar
+      if (
+        sidebarRef.current &&
+        !sidebarRef.current.contains(event.target as Node)
+      ) {
+        setIsSidebarOpen(false)
+      }
+    }
+
+    document.addEventListener("mousedown", handleClickOutside)
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside)
+    }
+  }, [isSidebarOpen, isMobile])
 
   return (
     <div className="flex h-screen overflow-hidden bg-background cyberpunk-grid circuit-bg">
@@ -41,6 +62,7 @@ export function DashboardLayout({ children }: { children: React.ReactNode }) {
 
       {/* Sidebar */}
       <div
+        ref={sidebarRef}
         className={cn(
           "fixed inset-y-0 left-0 z-40 w-64 transform transition-transform duration-300 ease-in-out bg-black/80 backdrop-blur-md border-r border-primary/20 md:translate-x-0",
           isSidebarOpen ? "translate-x-0" : "-translate-x-full",
@@ -121,13 +143,22 @@ export function DashboardLayout({ children }: { children: React.ReactNode }) {
           </nav>
 
           {/* Footer */}
-          <div className="p-4 border-t border-primary/20">
+          <div className="p-4 border-t border-primary/20 mb-10 lg:mb-0">
             <div className="text-xs text-center text-muted-foreground">
-              <p className="mt-1">© 2025 JakeKuo All right reserved.</p>
+              <p>© 2025 JakeKuo All right reserved.</p>
             </div>
           </div>
         </div>
       </div>
+
+      {/* Overlay for mobile: 點擊非sidebar區域會關閉 */}
+      {isSidebarOpen && isMobile && (
+        <div
+          className="fixed inset-0 z-30 bg-black/40 md:hidden"
+          aria-label="Sidebar overlay"
+          // No onClick needed, handled by document event
+        />
+      )}
 
       {/* Main content */}
       <main
