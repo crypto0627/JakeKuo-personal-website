@@ -11,17 +11,103 @@ import { ProjectCard } from "@/components/project-card"
 import { featuredProjects, allProjects } from "@/data/projects"
 import Link from "next/link"
 
+const RESUME_LANGUAGES = [
+  {
+    key: "en",
+    label: "English",
+    button: (
+      <>
+        <Download className="mr-2 h-4 w-4" /> Download Resume
+      </>
+    ),
+    content: (
+      <>
+        <div className="text-lg font-bold mb-2">Contact me to get my resume</div>
+        <div className="mb-2">Email: <span className="font-mono">jake0627a1@gmail.com</span></div>
+        <div className="text-sm text-muted-foreground">Please email me if you would like to receive my resume.</div>
+      </>
+    ),
+  },
+  {
+    key: "zh-tw",
+    label: "繁體中文",
+    button: (
+      <>
+        <FileText className="mr-2 h-4 w-4" /> 繁體中文
+      </>
+    ),
+    content: (
+      <>
+        <div className="text-lg font-bold mb-2">如需下載履歷，請聯絡我</div>
+        <div className="mb-2">電子郵件: <span className="font-mono">jake0627a1@gmail.com</span></div>
+        <div className="text-sm text-muted-foreground">若您需要我的履歷，請來信聯絡。</div>
+      </>
+    ),
+  },
+  {
+    key: "zh-cn",
+    label: "简体中文",
+    button: (
+      <>
+        <FileText className="mr-2 h-4 w-4" /> 简体中文
+      </>
+    ),
+    content: (
+      <>
+        <div className="text-lg font-bold mb-2">如需下载简历，请联系我</div>
+        <div className="mb-2">邮箱: <span className="font-mono">jake0627a1@gmail.com</span></div>
+        <div className="text-sm text-muted-foreground">如需获取我的简历，请发送邮件联系。</div>
+      </>
+    ),
+  },
+]
+
 export function HomeContent() {
   const [activeTab, setActiveTab] = useState<string>("featured")
   // Track which badge is hovered: "none" | "company" | "organization"
   const [hovered, setHovered] = useState<"none" | "company" | "organization">("none")
 
+  // Modal state
+  const [resumeModal, setResumeModal] = useState<null | "en" | "zh-tw" | "zh-cn">(null)
+
   const displayedProjects = useMemo(() => {
     return activeTab === "featured" ? featuredProjects : allProjects
   }, [activeTab])
 
+  // Helper to open modal with language
+  const handleResumeModal = (lang: "en" | "zh-tw" | "zh-cn") => {
+    setResumeModal(lang)
+  }
+
+  // Modal component
+  function ResumeModal({ openLang, onClose }: { openLang: "en" | "zh-tw" | "zh-cn", onClose: () => void }) {
+    const langObj = RESUME_LANGUAGES.find(l => l.key === openLang)
+    if (!langObj) return null
+    return (
+      <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm">
+        <div className="bg-zinc-900 border border-primary/30 rounded-2xl shadow-2xl p-8 max-w-xl w-full relative animate-in fade-in zoom-in-95">
+          <button
+            className="absolute top-2 right-2 text-muted-foreground hover:text-primary transition"
+            onClick={onClose}
+            aria-label="Close"
+          >
+            <svg width="20" height="20" fill="none" viewBox="0 0 20 20">
+              <path stroke="currentColor" strokeWidth="2" strokeLinecap="round" d="M5 5l10 10M15 5l-10 10"/>
+            </svg>
+          </button>
+          {langObj.content}
+        </div>
+      </div>
+    )
+  }
+
   return (
     <div className="space-y-8">
+      {/* Modal */}
+      {resumeModal && (
+        <ResumeModal openLang={resumeModal} onClose={() => setResumeModal(null)} />
+      )}
+
       {/* Hero Section */}
       <div className="relative rounded-3xl overflow-hidden bg-gradient-to-br from-black via-black to-primary/20 border border-primary/20 p-8 md:p-12">
         <div className="absolute inset-0 opacity-20">
@@ -136,21 +222,26 @@ export function HomeContent() {
             </p>
 
             <div className="flex flex-wrap gap-4 justify-center md:justify-start">
-              <Button className="rounded-3xl bg-primary hover:bg-primary/80 text-white glow">
-                <Download className="mr-2 h-4 w-4" /> Download Resume
+              <Button
+                className="rounded-3xl bg-primary hover:bg-primary/80 text-white glow"
+                onClick={() => handleResumeModal("en")}
+              >
+                {RESUME_LANGUAGES[0].button}
               </Button>
               <div className="flex gap-2">
                 <Button
                   variant="outline"
                   className="rounded-3xl border-secondary/50 hover:border-secondary hover:bg-secondary/20 text-secondary hover:text-secondary glow-cyan"
+                  onClick={() => handleResumeModal("zh-tw")}
                 >
-                  <FileText className="mr-2 h-4 w-4" /> 繁體中文
+                  {RESUME_LANGUAGES[1].button}
                 </Button>
                 <Button
                   variant="outline"
                   className="rounded-3xl border-accent/50 hover:border-accent hover:bg-accent/20 text-accent hover:text-accent glow-pink"
+                  onClick={() => handleResumeModal("zh-cn")}
                 >
-                  <FileText className="mr-2 h-4 w-4" /> 简体中文
+                  {RESUME_LANGUAGES[2].button}
                 </Button>
               </div>
             </div>
