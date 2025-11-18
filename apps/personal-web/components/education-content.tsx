@@ -87,7 +87,7 @@ export function EducationContent() {
                           src={edu.institutionLogo}
                           alt={`${edu.institution} logo`}
                           fill
-                          className="object-contain p-1 rounded-full bg-white"
+                          className="object-contain p-1 rounded-full bg-white/80 backdrop-blur-sm border border-primary/20"
                           sizes="48px"
                         />
                       </div>

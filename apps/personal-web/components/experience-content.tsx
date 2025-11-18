@@ -20,7 +20,7 @@ const experiences: Experience[] = [
     id: 1,
     role: "Full Stack Engineer",
     company: "Fortune Electric",
-    companyLogo: "https://media.licdn.com/dms/image/v2/C510BAQFG-p-akohg3g/company-logo_200_200/company-logo_200_200/0/1631345703048?e=1756339200&v=beta&t=K0dyC5XE3U1eEAepnHOuoIZCQivmdO_OaHbbCFTozWQ",
+    companyLogo: "https://www.fortune.com.tw/en/images/about/logo-xs.png",
     period: "2025/2/4 - Present",
     description:
       "Leading the development of a next-generation Energy Storage and Management System (EMS) for industrial applications, integrating real-time data visualization, smart scheduling, and secure control interfaces.",
@@ -46,7 +46,7 @@ const experiences: Experience[] = [
     id: 2,
     role: "Contributor & Frontend Engineer",
     company: "XueDAO",
-    companyLogo: "https://media.licdn.com/dms/image/v2/D560BAQHshnjgLpF7Jw/company-logo_200_200/company-logo_200_200/0/1713785348690?e=1756339200&v=beta&t=1KFA_hIDguasg2MdCgPr9jdFyooP4qdW65iVeaU3sXA",
+    companyLogo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcStzTKhmOh_ucV2UZ68TGgcKogdPC5gLHhvrA&s",
     period: "2024/4/15 - Present",
     description:
       "Contributed to Web3 education and open-source development by building community tools, organizing workshops, and participating in hackathons to empower blockchain learners in Taiwan.",
@@ -69,7 +69,7 @@ const experiences: Experience[] = [
     id: 3,
     role: "Blockchain Research Developer Intern",
     company: "Cathay Financial Holdings",
-    companyLogo: "https://media.licdn.com/dms/image/v2/C4D0BAQHf8hdm_7CuuA/company-logo_200_200/company-logo_200_200/0/1631304615081?e=1756339200&v=beta&t=OXbhTbvGZoMHi9HC_8gMu18FD-9B2VylolZ9SZCwqrk",
+    companyLogo: "https://media.licdn.com/dms/image/v2/C4D0BAQHf8hdm_7CuuA/company-logo_200_200/company-logo_200_200/0/1631304615081?e=2147483647&v=beta&t=rb-Bn_koGJFExASCrFoyJJs-NEFYlJZvgYI3xxZohWg",
     period: "2023/7/5 - 2024/2/23",
     description:
       "Worked on blockchain R&D and frontend development projects, focusing on usability, performance, and integrating Web3 technologies into enterprise-grade applications.",
