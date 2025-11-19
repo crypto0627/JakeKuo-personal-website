@@ -1,6 +1,6 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { User, Zap, Cpu, Network } from "lucide-react"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { User, Zap, Cpu, Network } from "lucide-react";
 
 export function SummaryContent() {
   return (
@@ -11,7 +11,9 @@ export function SummaryContent() {
         </div>
         <div>
           <h1 className="text-3xl font-bold">Professional Summary</h1>
-          <p className="text-muted-foreground">A brief overview of my professional background</p>
+          <p className="text-muted-foreground">
+            A brief overview of my professional background
+          </p>
         </div>
       </div>
 
@@ -19,15 +21,18 @@ export function SummaryContent() {
         <CardContent className="p-6 md:p-8">
           <div className="space-y-6">
             <p className="text-lg leading-relaxed">
-              Innovative Web3 developer with 5+ years of experience building decentralized applications and blockchain
-              solutions. Specialized in creating secure, scalable, and user-friendly interfaces for complex blockchain
-              systems. Passionate about pushing the boundaries of what's possible in the decentralized web.
+              Innovative Web3 developer with 5+ years of experience building
+              decentralized applications and blockchain solutions. Specialized
+              in creating secure, scalable, and user-friendly interfaces for
+              complex blockchain systems. Passionate about pushing the
+              boundaries of what's possible in the decentralized web.
             </p>
 
             <p className="text-lg leading-relaxed">
-              Proven track record of delivering high-quality projects for startups, established companies, and DAOs.
-              Experienced in all aspects of the development lifecycle, from concept and design to testing and
-              deployment.
+              Proven track record of delivering high-quality projects for
+              startups, established companies, and DAOs. Experienced in all
+              aspects of the development lifecycle, from concept and design to
+              testing and deployment.
             </p>
           </div>
         </CardContent>
@@ -76,31 +81,58 @@ export function SummaryContent() {
           </CardHeader>
           <CardContent className="pt-2">
             <div className="flex flex-wrap gap-2">
-              <Badge variant="outline" className="bg-secondary/10 text-secondary border-secondary/30">
+              <Badge
+                variant="outline"
+                className="bg-secondary/10 text-secondary border-secondary/30"
+              >
                 Solidity
               </Badge>
-              <Badge variant="outline" className="bg-secondary/10 text-secondary border-secondary/30">
+              <Badge
+                variant="outline"
+                className="bg-secondary/10 text-secondary border-secondary/30"
+              >
                 React
               </Badge>
-              <Badge variant="outline" className="bg-secondary/10 text-secondary border-secondary/30">
+              <Badge
+                variant="outline"
+                className="bg-secondary/10 text-secondary border-secondary/30"
+              >
                 Next.js
               </Badge>
-              <Badge variant="outline" className="bg-secondary/10 text-secondary border-secondary/30">
+              <Badge
+                variant="outline"
+                className="bg-secondary/10 text-secondary border-secondary/30"
+              >
                 TypeScript
               </Badge>
-              <Badge variant="outline" className="bg-secondary/10 text-secondary border-secondary/30">
+              <Badge
+                variant="outline"
+                className="bg-secondary/10 text-secondary border-secondary/30"
+              >
                 Ethers.js
               </Badge>
-              <Badge variant="outline" className="bg-secondary/10 text-secondary border-secondary/30">
+              <Badge
+                variant="outline"
+                className="bg-secondary/10 text-secondary border-secondary/30"
+              >
                 Web3.js
               </Badge>
-              <Badge variant="outline" className="bg-secondary/10 text-secondary border-secondary/30">
+              <Badge
+                variant="outline"
+                className="bg-secondary/10 text-secondary border-secondary/30"
+              >
                 Hardhat
               </Badge>
-              <Badge variant="outline" className="bg-secondary/10 text-secondary border-secondary/30">
+              <Badge
+                variant="outline"
+                className="bg-secondary/10 text-secondary border-secondary/30"
+              >
                 IPFS
               </Badge>
-              <Badge variant="outline" className="bg-secondary/10 text-secondary border-secondary/30">
+              <Badge
+                variant="outline"
+                className="bg-secondary/10 text-secondary border-secondary/30"
+              >
                 The Graph
               </Badge>
             </div>
@@ -118,22 +150,40 @@ export function SummaryContent() {
           </CardHeader>
           <CardContent className="pt-2">
             <div className="flex flex-wrap gap-2">
-              <Badge variant="outline" className="bg-accent/10 text-accent border-accent/30">
+              <Badge
+                variant="outline"
+                className="bg-accent/10 text-accent border-accent/30"
+              >
                 Ethereum
               </Badge>
-              <Badge variant="outline" className="bg-accent/10 text-accent border-accent/30">
+              <Badge
+                variant="outline"
+                className="bg-accent/10 text-accent border-accent/30"
+              >
                 Polygon
               </Badge>
-              <Badge variant="outline" className="bg-accent/10 text-accent border-accent/30">
+              <Badge
+                variant="outline"
+                className="bg-accent/10 text-accent border-accent/30"
+              >
                 Solana
               </Badge>
-              <Badge variant="outline" className="bg-accent/10 text-accent border-accent/30">
+              <Badge
+                variant="outline"
+                className="bg-accent/10 text-accent border-accent/30"
+              >
                 Avalanche
               </Badge>
-              <Badge variant="outline" className="bg-accent/10 text-accent border-accent/30">
+              <Badge
+                variant="outline"
+                className="bg-accent/10 text-accent border-accent/30"
+              >
                 Arbitrum
               </Badge>
-              <Badge variant="outline" className="bg-accent/10 text-accent border-accent/30">
+              <Badge
+                variant="outline"
+                className="bg-accent/10 text-accent border-accent/30"
+              >
                 Optimism
               </Badge>
             </div>
@@ -141,5 +191,5 @@ export function SummaryContent() {
         </Card>
       </div>
     </div>
-  )
+  );
 }

@@ -1,17 +1,17 @@
-import Image from "next/image"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { GraduationCap, Calendar, BookOpen } from "lucide-react"
-import { useDuration, formatDuration } from "@/hooks/useDuration"
+import Image from "next/image";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { GraduationCap, Calendar, BookOpen } from "lucide-react";
+import { useDuration, formatDuration } from "@/hooks/useDuration";
 
 interface Education {
-  id: number
-  degree: string
-  institution: string
-  institutionLogo?: string
-  period: string
-  description: string
-  courses: string[]
+  id: number;
+  degree: string;
+  institution: string;
+  institutionLogo?: string;
+  period: string;
+  description: string;
+  courses: string[];
 }
 
 const educations: Education[] = [
@@ -19,7 +19,8 @@ const educations: Education[] = [
     id: 1,
     degree: "Master of Computer and Communication Engineering",
     institution: "National Kaohsiung University of Science and Technology",
-    institutionLogo: "https://www.nkust.edu.tw/var/file/0/1000/img/513/176957439.png",
+    institutionLogo:
+      "https://www.nkust.edu.tw/var/file/0/1000/img/513/176957439.png",
     period: "2022/9 - 2024/1",
     description:
       "Completed advanced coursework in Blockchain Architecture & Smart Contract, Information Security, Mobile Application Development (Android), and Advanced Algorithms. Developed DApps and conducted research on blockchain technologies including Bitcoin and Ethereum. Specialized in blockchain technology, culminating in a thesis on 'Assessing the Feasibility of the Stellar Consensus Protocol in Pi Network and Business Model Analysis'.",
@@ -34,9 +35,11 @@ const educations: Education[] = [
     id: 2,
     degree: "Bachelor of Computer and Communication Engineering",
     institution: "National Kaohsiung University of Science and Technology",
-    institutionLogo: "https://www.nkust.edu.tw/var/file/0/1000/img/513/176957439.png",
+    institutionLogo:
+      "https://www.nkust.edu.tw/var/file/0/1000/img/513/176957439.png",
     period: "2018/9 - 2022/6",
-    description: "Focus on computer science basic, software development methodologies and web technologies.",
+    description:
+      "Focus on computer science basic, software development methodologies and web technologies.",
     courses: [
       "Introduction to Computer Science",
       "Programming (C/C++)",
@@ -55,7 +58,7 @@ const educations: Education[] = [
       "Calculus",
     ],
   },
-]
+];
 
 export function EducationContent() {
   return (
@@ -72,7 +75,7 @@ export function EducationContent() {
 
       <div className="space-y-6">
         {educations.map((edu) => {
-          const duration = useDuration(edu.period)
+          const duration = useDuration(edu.period);
           return (
             <Card
               key={edu.id}
@@ -94,7 +97,9 @@ export function EducationContent() {
                     )}
                     <div>
                       <CardTitle className="text-xl">{edu.degree}</CardTitle>
-                      <p className="text-primary font-medium">{edu.institution}</p>
+                      <p className="text-primary font-medium">
+                        {edu.institution}
+                      </p>
                     </div>
                   </div>
                   <div className="flex flex-col items-start md:items-end text-muted-foreground">
@@ -119,7 +124,11 @@ export function EducationContent() {
                   </h4>
                   <div className="flex flex-wrap gap-2">
                     {edu.courses.map((course, index) => (
-                      <Badge key={index} variant="outline" className="bg-primary/10 text-primary border-primary/30">
+                      <Badge
+                        key={index}
+                        variant="outline"
+                        className="bg-primary/10 text-primary border-primary/30"
+                      >
                         {course}
                       </Badge>
                     ))}
@@ -127,9 +136,9 @@ export function EducationContent() {
                 </div>
               </CardContent>
             </Card>
-          )
+          );
         })}
       </div>
     </div>
-  )
+  );
 }

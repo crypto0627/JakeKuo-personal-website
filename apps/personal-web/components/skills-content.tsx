@@ -1,17 +1,17 @@
-import type React from "react"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Progress } from "@/components/ui/progress"
-import { Code2, Server, Layers, Cpu, Palette, Database } from "lucide-react"
+import type React from "react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Progress } from "@/components/ui/progress";
+import { Code2, Server, Layers, Cpu, Palette, Database } from "lucide-react";
 
 interface SkillCategory {
-  id: number
-  name: string
-  icon: React.ElementType
+  id: number;
+  name: string;
+  icon: React.ElementType;
   skills: {
-    name: string
-    level: number
-    color: string
-  }[]
+    name: string;
+    level: number;
+    color: string;
+  }[];
 }
 
 const skillCategories: SkillCategory[] = [
@@ -70,7 +70,7 @@ const skillCategories: SkillCategory[] = [
       { name: "DeFi Protocols", level: 80, color: "secondary" },
     ],
   },
-]
+];
 
 export function SkillsContent() {
   return (
@@ -81,7 +81,9 @@ export function SkillsContent() {
         </div>
         <div>
           <h1 className="text-3xl font-bold">Technical Skills</h1>
-          <p className="text-muted-foreground">My expertise in various technologies and frameworks</p>
+          <p className="text-muted-foreground">
+            My expertise in various technologies and frameworks
+          </p>
         </div>
       </div>
 
@@ -105,12 +107,18 @@ export function SkillsContent() {
                   <div key={index}>
                     <div className="flex justify-between items-center mb-1">
                       <span className="text-sm font-medium">{skill.name}</span>
-                      <span className="text-xs text-muted-foreground">{skill.level}%</span>
+                      <span className="text-xs text-muted-foreground">
+                        {skill.level}%
+                      </span>
                     </div>
                     <Progress
                       value={skill.level}
                       className={`h-2 ${
-                        skill.color === "primary" ? "bg-muted" : skill.color === "secondary" ? "bg-muted" : "bg-muted"
+                        skill.color === "primary"
+                          ? "bg-muted"
+                          : skill.color === "secondary"
+                            ? "bg-muted"
+                            : "bg-muted"
                       }`}
                       indicatorClassName={`${
                         skill.color === "primary"
@@ -128,5 +136,5 @@ export function SkillsContent() {
         ))}
       </div>
     </div>
-  )
+  );
 }

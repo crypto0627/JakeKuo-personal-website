@@ -1,18 +1,18 @@
-import Image from "next/image"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Briefcase, Calendar } from "lucide-react"
-import { useDuration, formatDuration } from "@/hooks/useDuration"
+import Image from "next/image";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Briefcase, Calendar } from "lucide-react";
+import { useDuration, formatDuration } from "@/hooks/useDuration";
 
 interface Experience {
-  id: number
-  role: string
-  company: string
-  companyLogo?: string
-  period: string
-  description: string
-  achievements: string[]
-  technologies: string[]
+  id: number;
+  role: string;
+  company: string;
+  companyLogo?: string;
+  period: string;
+  description: string;
+  achievements: string[];
+  technologies: string[];
 }
 
 const experiences: Experience[] = [
@@ -46,7 +46,8 @@ const experiences: Experience[] = [
     id: 2,
     role: "Contributor & Frontend Engineer",
     company: "XueDAO",
-    companyLogo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcStzTKhmOh_ucV2UZ68TGgcKogdPC5gLHhvrA&s",
+    companyLogo:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcStzTKhmOh_ucV2UZ68TGgcKogdPC5gLHhvrA&s",
     period: "2024/4/15 - Present",
     description:
       "Contributed to Web3 education and open-source development by building community tools, organizing workshops, and participating in hackathons to empower blockchain learners in Taiwan.",
@@ -69,7 +70,8 @@ const experiences: Experience[] = [
     id: 3,
     role: "Blockchain Research Developer Intern",
     company: "Cathay Financial Holdings",
-    companyLogo: "https://media.licdn.com/dms/image/v2/C4D0BAQHf8hdm_7CuuA/company-logo_200_200/company-logo_200_200/0/1631304615081?e=2147483647&v=beta&t=rb-Bn_koGJFExASCrFoyJJs-NEFYlJZvgYI3xxZohWg",
+    companyLogo:
+      "https://media.licdn.com/dms/image/v2/C4D0BAQHf8hdm_7CuuA/company-logo_200_200/company-logo_200_200/0/1631304615081?e=2147483647&v=beta&t=rb-Bn_koGJFExASCrFoyJJs-NEFYlJZvgYI3xxZohWg",
     period: "2023/7/5 - 2024/2/23",
     description:
       "Worked on blockchain R&D and frontend development projects, focusing on usability, performance, and integrating Web3 technologies into enterprise-grade applications.",
@@ -87,7 +89,7 @@ const experiences: Experience[] = [
       "Cloudflare",
     ],
   },
-]
+];
 
 export function ExperienceContent() {
   return (
@@ -98,13 +100,15 @@ export function ExperienceContent() {
         </div>
         <div>
           <h1 className="text-3xl font-bold">Professional Experience</h1>
-          <p className="text-muted-foreground">My career journey in Web3 and blockchain development</p>
+          <p className="text-muted-foreground">
+            My career journey in Web3 and blockchain development
+          </p>
         </div>
       </div>
 
       <div className="space-y-6">
         {experiences.map((exp) => {
-          const duration = useDuration(exp.period)
+          const duration = useDuration(exp.period);
           return (
             <Card
               key={exp.id}
@@ -137,17 +141,19 @@ export function ExperienceContent() {
                         {(() => {
                           // period 可能是 "YYYY/M/D - YYYY/M/D" 或 "YYYY/M/D - Present"
                           // 只顯示 "YYYY/M/D - YYYY/M/D" 或 "YYYY/M/D - Present"
-                          const [start, end] = exp.period.split(" - ").map((s) => s.trim())
+                          const [start, end] = exp.period
+                            .split(" - ")
+                            .map((s) => s.trim());
                           function formatDate(str: string) {
-                            const parts = str.split("/")
+                            const parts = str.split("/");
                             if (parts.length === 3) {
-                              return `${parts[0]}/${parts[1]}/${parts[2]}`
+                              return `${parts[0]}/${parts[1]}/${parts[2]}`;
                             } else if (parts.length === 2) {
-                              return `${parts[0]}/${parts[1]}`
+                              return `${parts[0]}/${parts[1]}`;
                             }
-                            return str
+                            return str;
                           }
-                          return `${formatDate(start)} - ${end === "Present" ? "Present" : formatDate(end)}`
+                          return `${formatDate(start)} - ${end === "Present" ? "Present" : formatDate(end)}`;
                         })()}
                       </span>
                     </div>
@@ -163,7 +169,9 @@ export function ExperienceContent() {
                 <p className="mb-4">{exp.description}</p>
 
                 <div className="mb-4">
-                  <h4 className="text-sm font-medium text-muted-foreground mb-2">Key Achievements</h4>
+                  <h4 className="text-sm font-medium text-muted-foreground mb-2">
+                    Key Achievements
+                  </h4>
                   <ul className="space-y-2">
                     {exp.achievements.map((achievement, index) => (
                       <li key={index} className="flex items-start space-x-2">
@@ -175,10 +183,16 @@ export function ExperienceContent() {
                 </div>
 
                 <div>
-                  <h4 className="text-sm font-medium text-muted-foreground mb-2">Technologies</h4>
+                  <h4 className="text-sm font-medium text-muted-foreground mb-2">
+                    Technologies
+                  </h4>
                   <div className="flex flex-wrap gap-2">
                     {exp.technologies.map((tech, index) => (
-                      <Badge key={index} variant="outline" className="bg-primary/10 text-primary border-primary/30">
+                      <Badge
+                        key={index}
+                        variant="outline"
+                        className="bg-primary/10 text-primary border-primary/30"
+                      >
                         {tech}
                       </Badge>
                     ))}
@@ -186,9 +200,9 @@ export function ExperienceContent() {
                 </div>
               </CardContent>
             </Card>
-          )
+          );
         })}
       </div>
     </div>
-  )
+  );
 }

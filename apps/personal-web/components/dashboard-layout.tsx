@@ -1,36 +1,57 @@
-"use client"
+"use client";
 
-import type React from "react"
-import { useState, useEffect, useCallback, useRef } from "react"
-import { usePathname } from "next/navigation"
-import Link from "next/link"
-import { Menu, X, Wallet, Bitcoin, Mail } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { cn } from "@/lib/utils"
-import { navItems } from "@/data/navigation"
-import { useMobileDetect } from "@/hooks/use-mobile-detect"
+import type React from "react";
+import {
+  useState,
+  useEffect,
+  useCallback,
+  useRef,
+  createContext,
+  useContext,
+} from "react";
+import { usePathname } from "next/navigation";
+import Link from "next/link";
+import { Menu, X, Wallet, Bitcoin, Mail } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
+import { navItems } from "@/data/navigation";
+import { useMobileDetect } from "@/hooks/use-mobile-detect";
+
+// Context for modal state
+interface ModalContextType {
+  isModalOpen: boolean;
+  setIsModalOpen: (open: boolean) => void;
+}
+
+const ModalContext = createContext<ModalContextType>({
+  isModalOpen: false,
+  setIsModalOpen: () => {},
+});
+
+export const useModal = () => useContext(ModalContext);
 
 export function DashboardLayout({ children }: { children: React.ReactNode }) {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(true)
-  const isMobile = useMobileDetect()
-  const pathname = usePathname()
-  const sidebarRef = useRef<HTMLDivElement>(null)
+  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const isMobile = useMobileDetect();
+  const pathname = usePathname();
+  const sidebarRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (isMobile) {
-      setIsSidebarOpen(false)
+      setIsSidebarOpen(false);
     } else {
-      setIsSidebarOpen(true)
+      setIsSidebarOpen(true);
     }
-  }, [isMobile])
+  }, [isMobile]);
 
   const toggleSidebar = useCallback(() => {
-    setIsSidebarOpen((prev) => !prev)
-  }, [])
+    setIsSidebarOpen((prev) => !prev);
+  }, []);
 
   // 點擊非sidebar區域會關閉
   useEffect(() => {
-    if (!isSidebarOpen || !isMobile) return
+    if (!isSidebarOpen || !isMobile) return;
 
     function handleClickOutside(event: MouseEvent) {
       // Only close if click is outside the sidebar
@@ -38,15 +59,15 @@ export function DashboardLayout({ children }: { children: React.ReactNode }) {
         sidebarRef.current &&
         !sidebarRef.current.contains(event.target as Node)
       ) {
-        setIsSidebarOpen(false)
+        setIsSidebarOpen(false);
       }
     }
 
-    document.addEventListener("mousedown", handleClickOutside)
+    document.addEventListener("mousedown", handleClickOutside);
     return () => {
-      document.removeEventListener("mousedown", handleClickOutside)
-    }
-  }, [isSidebarOpen, isMobile])
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isSidebarOpen, isMobile]);
 
   return (
     <div className="flex h-screen overflow-hidden bg-background cyberpunk-grid circuit-bg">
@@ -57,7 +78,11 @@ export function DashboardLayout({ children }: { children: React.ReactNode }) {
         onClick={toggleSidebar}
         className="fixed top-4 left-4 z-50 md:hidden bg-background/80 backdrop-blur-sm border border-primary/20 rounded-full p-2 glow"
       >
-        {isSidebarOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+        {isSidebarOpen ? (
+          <X className="h-5 w-5" />
+        ) : (
+          <Menu className="h-5 w-5" />
+        )}
       </Button>
 
       {/* Sidebar */}
@@ -77,11 +102,20 @@ export function DashboardLayout({ children }: { children: React.ReactNode }) {
                 <Bitcoin className="w-8 h-8 text-primary" />
               </div>
             </div>
-            <h2 className="text-xl font-bold text-center glow-text mb-1">Jake Kuo</h2>
-            <p className="text-xs text-center text-muted-foreground">XuoDAO Builder Team</p>
-            <p className="text-xs text-center text-muted-foreground">Fullstack engineer</p>
+            <h2 className="text-xl font-bold text-center glow-text mb-1">
+              Jake Kuo
+            </h2>
+            <p className="text-xs text-center text-muted-foreground">
+              XuoDAO Builder Team
+            </p>
+            <p className="text-xs text-center text-muted-foreground">
+              Fullstack engineer
+            </p>
             <div className="flex justify-center mt-3 space-x-2">
-              <Link href='https://etherscan.io/address/0x314d66D77AD35e65D1D7CdB5c82F51B2792b91c4' target="_blank">
+              <Link
+                href="https://etherscan.io/address/0x314d66D77AD35e65D1D7CdB5c82F51B2792b91c4"
+                target="_blank"
+              >
                 <Button
                   variant="outline"
                   size="icon"
@@ -161,14 +195,19 @@ export function DashboardLayout({ children }: { children: React.ReactNode }) {
       )}
 
       {/* Main content */}
-      <main
-        className={cn(
-          "flex-1 overflow-y-auto transition-all duration-300 ease-in-out",
-          isSidebarOpen && !isMobile ? "ml-64" : "ml-0",
-        )}
-      >
-        <div className="container py-8 px-4 md:px-8 max-w-7xl mx-auto">{children}</div>
-      </main>
+      <ModalContext.Provider value={{ isModalOpen, setIsModalOpen }}>
+        <main
+          className={cn(
+            "flex-1 transition-all duration-300 ease-in-out",
+            isSidebarOpen && !isMobile ? "ml-64" : "ml-0",
+            isModalOpen ? "overflow-hidden" : "overflow-y-auto",
+          )}
+        >
+          <div className="container py-8 px-4 md:px-8 max-w-7xl mx-auto">
+            {children}
+          </div>
+        </main>
+      </ModalContext.Provider>
     </div>
-  )
+  );
 }

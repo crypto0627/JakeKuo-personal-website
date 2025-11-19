@@ -1,10 +1,17 @@
-import type React from "react"
-import { Home, User, Briefcase, Code2, GraduationCap, Trophy } from "lucide-react"
+import type React from "react";
+import {
+  Home,
+  User,
+  Briefcase,
+  Code2,
+  GraduationCap,
+  Trophy,
+} from "lucide-react";
 
 export interface NavItem {
-  title: string
-  href: string
-  icon: React.ElementType
+  title: string;
+  href: string;
+  icon: React.ElementType;
 }
 
 export const navItems: NavItem[] = [
@@ -28,4 +35,4 @@ export const navItems: NavItem[] = [
     href: "/achievements",
     icon: Trophy,
   },
-]
+];

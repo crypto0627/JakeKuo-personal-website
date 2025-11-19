@@ -1,19 +1,19 @@
-import type React from "react"
-import Image from "next/image"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
-import { Trophy, Github, ExternalLink } from "lucide-react"
+import type React from "react";
+import Image from "next/image";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Trophy, Github, ExternalLink } from "lucide-react";
 
 interface Achievement {
-  id: number
-  title: string
-  description: string
-  logo: string // path to logo image
-  year: string
-  category: string
-  githubUrl?: string
-  demoUrl?: string
+  id: number;
+  title: string;
+  description: string;
+  logo: string; // path to logo image
+  year: string;
+  category: string;
+  githubUrl?: string;
+  demoUrl?: string;
 }
 
 const achievements: Achievement[] = [
@@ -37,7 +37,7 @@ const achievements: Achievement[] = [
     year: "2024 EthGlobal Bangkok",
     category: "Prizes Applied: Blockscout, Fhenix, Inco Network",
     githubUrl: "https://github.com/crypto0627/Rating_pro",
-    demoUrl: "https://ethglobal.com/showcase/rating-pro-vo3ia"
+    demoUrl: "https://ethglobal.com/showcase/rating-pro-vo3ia",
   },
   {
     id: 3,
@@ -48,7 +48,7 @@ const achievements: Achievement[] = [
     year: "2024 Celestia the Infinite Space Bazaar hackathon",
     category: "Third Prize",
     githubUrl: "https://github.com/hollow-leaf/Konan",
-    demoUrl: "https://dorahacks.io/buidl/12654"
+    demoUrl: "https://dorahacks.io/buidl/12654",
   },
   {
     id: 4,
@@ -59,7 +59,8 @@ const achievements: Achievement[] = [
     year: "2024 ETH Taipei",
     category: "Zircuit Second place",
     githubUrl: "https://github.com/hollow-leaf/Shishimaru",
-    demoUrl: "https://taikai.network/ethtaipei/hackathons/hackathon-2024/projects/clu40l9l40irkwc01f2v36xfk/idea",
+    demoUrl:
+      "https://taikai.network/ethtaipei/hackathons/hackathon-2024/projects/clu40l9l40irkwc01f2v36xfk/idea",
   },
   {
     id: 5,
@@ -83,7 +84,7 @@ const achievements: Achievement[] = [
     githubUrl: "https://github.com/hollow-leaf/inazuma",
     demoUrl: "https://app.buidlbox.io/projects/free-food-station",
   },
-]
+];
 
 export function AchievementsContent() {
   return (
@@ -94,7 +95,9 @@ export function AchievementsContent() {
         </div>
         <div>
           <h1 className="text-3xl font-bold">Achievements</h1>
-          <p className="text-muted-foreground">Notable accomplishments and recognition</p>
+          <p className="text-muted-foreground">
+            Notable accomplishments and recognition
+          </p>
         </div>
       </div>
 
@@ -119,10 +122,15 @@ export function AchievementsContent() {
                 <div>
                   <CardTitle className="text-xl">{achievement.title}</CardTitle>
                   <div className="flex items-center space-x-2 mt-1">
-                    <Badge variant="outline" className="bg-primary/10 text-primary border-primary/30">
+                    <Badge
+                      variant="outline"
+                      className="bg-primary/10 text-primary border-primary/30"
+                    >
                       {achievement.category}
                     </Badge>
-                    <span className="text-xs text-muted-foreground">{achievement.year}</span>
+                    <span className="text-xs text-muted-foreground">
+                      {achievement.year}
+                    </span>
                   </div>
                 </div>
               </div>
@@ -137,7 +145,11 @@ export function AchievementsContent() {
                     variant="outline"
                     className="rounded-full border-primary/30 text-primary hover:bg-primary/10"
                   >
-                    <a href={achievement.githubUrl} target="_blank" rel="noopener noreferrer">
+                    <a
+                      href={achievement.githubUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
                       <Github className="w-4 h-4 mr-2" />
                       GitHub
                     </a>
@@ -149,7 +161,11 @@ export function AchievementsContent() {
                     variant="outline"
                     className="rounded-full border-accent/30 text-accent hover:bg-accent/10"
                   >
-                    <a href={achievement.demoUrl} target="_blank" rel="noopener noreferrer">
+                    <a
+                      href={achievement.demoUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
                       <ExternalLink className="w-4 h-4 mr-2" />
                       Demo
                     </a>
@@ -161,5 +177,5 @@ export function AchievementsContent() {
         ))}
       </div>
     </div>
-  )
+  );
 }
