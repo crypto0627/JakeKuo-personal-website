@@ -27,8 +27,8 @@ export function CyberAvatar({
   return (
     <div className={cn("relative", className)}>
       <div className={cn("relative", sizeClasses[size])}>
-        <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-primary via-secondary to-accent animate-pulse-glow"></div>
-        <div className="absolute inset-1 rounded-2xl overflow-hidden bg-black">
+        <div className="absolute inset-0 rounded-full bg-gradient-to-r from-primary via-secondary to-accent animate-pulse-glow"></div>
+        <div className="absolute inset-1 rounded-full overflow-hidden bg-black">
           <div className="w-full h-full relative">
             <Image
               src={src || "/placeholder.svg"}

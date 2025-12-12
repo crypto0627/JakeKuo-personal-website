@@ -15,7 +15,7 @@ import { Menu, X, Wallet, Bitcoin, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { navItems } from "@/data/navigation";
-import { useMobileDetect } from "@/hooks/use-mobile-detect";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 // Context for modal state
 interface ModalContextType {
@@ -33,7 +33,7 @@ export const useModal = () => useContext(ModalContext);
 export function DashboardLayout({ children }: { children: React.ReactNode }) {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const isMobile = useMobileDetect();
+  const isMobile = useIsMobile();
   const pathname = usePathname();
   const sidebarRef = useRef<HTMLDivElement>(null);
 
@@ -49,26 +49,6 @@ export function DashboardLayout({ children }: { children: React.ReactNode }) {
     setIsSidebarOpen((prev) => !prev);
   }, []);
 
-  // 點擊非sidebar區域會關閉
-  useEffect(() => {
-    if (!isSidebarOpen || !isMobile) return;
-
-    function handleClickOutside(event: MouseEvent) {
-      // Only close if click is outside the sidebar
-      if (
-        sidebarRef.current &&
-        !sidebarRef.current.contains(event.target as Node)
-      ) {
-        setIsSidebarOpen(false);
-      }
-    }
-
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, [isSidebarOpen, isMobile]);
-
   return (
     <div className="flex h-screen overflow-hidden bg-background cyberpunk-grid circuit-bg">
       {/* Mobile sidebar toggle */}
@@ -79,7 +59,7 @@ export function DashboardLayout({ children }: { children: React.ReactNode }) {
         className="fixed top-4 left-4 z-50 md:hidden bg-background/80 backdrop-blur-sm border border-primary/20 rounded-full p-2 glow"
       >
         {isSidebarOpen ? (
-          <X className="h-5 w-5" />
+          <X className="h-5 w-5" onClick={() => setIsSidebarOpen(false)} />
         ) : (
           <Menu className="h-5 w-5" />
         )}
@@ -190,7 +170,7 @@ export function DashboardLayout({ children }: { children: React.ReactNode }) {
         <div
           className="fixed inset-0 z-30 bg-black/40 md:hidden"
           aria-label="Sidebar overlay"
-          // No onClick needed, handled by document event
+          onClick={() => setIsSidebarOpen(false)}
         />
       )}
 

@@ -101,7 +101,7 @@ export function ExperienceContent() {
         <div>
           <h1 className="text-3xl font-bold">Professional Experience</h1>
           <p className="text-muted-foreground">
-            My career journey in Web3 and blockchain development
+            My career journey in Energy and Blockchain development
           </p>
         </div>
       </div>
@@ -136,11 +136,8 @@ export function ExperienceContent() {
                   <div className="flex flex-col items-start md:items-end text-muted-foreground">
                     <div className="flex items-center space-x-2">
                       <Calendar className="h-4 w-4" />
-                      {/* 顯示完整日期 */}
                       <span>
                         {(() => {
-                          // period 可能是 "YYYY/M/D - YYYY/M/D" 或 "YYYY/M/D - Present"
-                          // 只顯示 "YYYY/M/D - YYYY/M/D" 或 "YYYY/M/D - Present"
                           const [start, end] = exp.period
                             .split(" - ")
                             .map((s) => s.trim());

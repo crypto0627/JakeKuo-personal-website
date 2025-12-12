@@ -18,18 +18,9 @@ export function HomeContent() {
   const [hovered, setHovered] = useState<"none" | "company" | "organization">(
     "none",
   );
-
-  // Modal state
-  const [resumeModal, setResumeModal] = useState<ResumeLanguage | null>(null);
-
   const displayedProjects = useMemo(() => {
     return activeTab === "featured" ? featuredProjects : allProjects;
   }, [activeTab]);
-
-  // Helper to open modal with language
-  const handleResumeModal = (lang: ResumeLanguage) => {
-    setResumeModal(lang);
-  };
 
   return (
     <div className="space-y-8">
@@ -55,25 +46,19 @@ export function HomeContent() {
             >
               View on Ethereum
             </span>
-
-            {/* Company & Organization: Responsive layout */}
             <div
               className="
                 mt-3
                 flex flex-col
-                items-center
+                items-start
                 gap-2
-                w-full
-                sm:w-max
-                md:absolute md:left-0 md:translate-x-0 md:top-full
-                md:flex-col md:items-start
-                md:w-auto
+                md:absolute md:translate-x-0 md:top-full md:items-start
                 md:gap-2
                 relative
                 z-20
               "
             >
-              <div className="flex flex-col sm:flex-row md:flex-col gap-2 w-full sm:w-auto">
+              <div className="flex flex-col sm:flex-row md:flex-col gap-2">
                 <Link
                   href="https://www.linkedin.com/company/fortune-electric/posts/?feedView=all"
                   target="_blank"
@@ -82,7 +67,7 @@ export function HomeContent() {
                   aria-label="View Fortune on LinkedIn"
                 >
                   <div
-                    className="flex items-center gap-2 px-3 py-1 rounded-full bg-gradient-to-r from-primary/20 via-black/60 to-accent/20 shadow-lg backdrop-blur-md relative cursor-pointer min-w-[140px] w-full sm:w-auto"
+                    className="flex items-center gap-2 px-3 py-1 rounded-full bg-gradient-to-r from-primary/20 via-black/60 to-accent/20 shadow-lg backdrop-blur-md relative cursor-pointer"
                     onMouseEnter={() => setHovered("company")}
                     onMouseLeave={() => setHovered("none")}
                     style={{
@@ -163,20 +148,22 @@ export function HomeContent() {
           <div className="max-w-3xl">
             <h1 className="text-4xl md:text-5xl font-bold mb-4 text-center md:text-left">
               <span
-                className="text-white font-bold text-6xl"
+                className="text-white font-bold text-4xl"
                 data-text="CYBER_DEV"
               >
                 Jake Kuo 郭來鴻
               </span>
             </h1>
             <h2 className="text-2xl md:text-3xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-primary via-secondary to-accent text-center md:text-left">
-              Web3 Developer & FullStack Engineer
+              Energy & web3 FullStack Engineer
             </h2>
             <p className="text-lg text-muted-foreground mb-8 text-center md:text-left">
-              Full-stack developer skilled in TypeScript, React/Vue 3,
-              Node.js/Gin, and SQL/NoSQL. Focused on Web3 and energy systems,
-              building decentralized apps and smart infrastructure. Specialized
-              in DeFi, payments, and delivering seamless user experiences.
+              I’m a full-stack engineer with experience building
+              production-grade web applications, real-time dashboards, and
+              blockchain-based systems. I focus on creating reliable products,
+              improving performance, and communicating clearly with designers,
+              product managers, and cross-functional teams. I’m excited to join
+              an international team and contribute to products.
             </p>
           </div>
         </div>
@@ -188,32 +175,7 @@ export function HomeContent() {
         <div className="lg:col-span-1 space-y-6">
           <Card className="rounded-3xl border border-primary/20 bg-black/60 backdrop-blur-sm overflow-hidden">
             <CardContent className="p-6">
-              <h3 className="text-xl font-bold mb-4 text-primary glow-text">
-                Quick Stats
-              </h3>
-
-              <div className="space-y-4">
-                <StatsBar
-                  label="Fullstack Experience"
-                  value="2+ Years"
-                  percentage={100}
-                  color="primary"
-                />
-                <StatsBar
-                  label="Web3 Hackathon"
-                  value="10+"
-                  percentage={100}
-                  color="secondary"
-                />
-                <StatsBar
-                  label="Repositories"
-                  value="15+"
-                  percentage={100}
-                  color="accent"
-                />
-              </div>
-
-              <div className="mt-6 pt-6 border-t border-primary/20">
+              <div className="border-primary/20">
                 <h4 className="text-lg font-bold mb-3">Top Skills</h4>
                 <div className="flex flex-wrap gap-2">
                   <Badge
@@ -316,6 +278,22 @@ export function HomeContent() {
                   </Button>
                 </Link>
               </div>
+            </CardContent>
+          </Card>
+
+          <Card className="rounded-3xl border border-primary/20 bg-black/60 backdrop-blur-sm overflow-hidden">
+            <CardContent className="p-6">
+              <h3 className="text-xl font-bold mb-4 text-primary glow-text">
+                My Blog
+              </h3>
+              <Link href="/" target="_blank" className="w-full">
+                <Button
+                  variant="outline"
+                  className="rounded-3xl border-accent/30 hover:border-accent w-full"
+                >
+                  <Send className="mr-2 h-4 w-4" /> Jake Blog
+                </Button>
+              </Link>
             </CardContent>
           </Card>
         </div>
