@@ -1,7 +1,6 @@
 import { MongoClient, ServerApiVersion } from "mongodb";
 
 // 從環境變數取得 MongoDB URI
-// 格式: mongodb+srv://username:password@cluster.mongodb.net/?appName=app-name
 // 注意：如果密碼包含特殊字符（如 @, :, /, #, ?, &），需要進行 URL 編碼
 const uri = process.env.DATABASE_URI;
 
