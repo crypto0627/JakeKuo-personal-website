@@ -4,17 +4,8 @@ import { MongoClient, ServerApiVersion } from "mongodb";
 // 注意：如果密碼包含特殊字符（如 @, :, /, #, ?, &），需要進行 URL 編碼
 const uri = process.env.DATABASE_URI;
 
-if (!uri) {
-  throw new Error(
-    "Please define the DATABASE_URI environment variable inside .env.local"
-  );
-}
-
-// 確保 URI 中的密碼已被替換
-if (uri.includes("<db_password>")) {
-  throw new Error(
-    "Please replace <db_password> in DATABASE_URI with your actual MongoDB password"
-  );
+if (!process.env.DATABASE_URI) {
+  throw new Error("DATABASE_URI not set");
 }
 
 let client: MongoClient;
