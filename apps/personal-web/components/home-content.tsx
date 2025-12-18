@@ -286,7 +286,7 @@ export function HomeContent() {
               <h3 className="text-xl font-bold mb-4 text-primary glow-text">
                 My Blog
               </h3>
-              <Link href="/" target="_blank" className="w-full">
+              <Link href="https://blog.jakekuo.com/" target="_blank" className="w-full">
                 <Button
                   variant="outline"
                   className="rounded-3xl border-accent/30 hover:border-accent w-full"
