@@ -1,4 +1,4 @@
-import clientPromise from "@/lib/mongodb";
+import { getMongoClient } from "@/lib/mongodb";
 import { ObjectId, type WithId } from "mongodb";
 import { NextResponse } from "next/server";
 import { cookies } from "next/headers";
@@ -51,7 +51,7 @@ export async function GET(req: Request) {
     const tag = searchParams.get("tag");
     const skip = (page - 1) * limit;
 
-    const client = await clientPromise;
+    const client = await getMongoClient();
     const db = client.db("blog");
     const isAdmin = await checkAdmin();
 
@@ -121,7 +121,7 @@ export async function POST(req: Request) {
       );
     }
 
-    const client = await clientPromise;
+    const client = await getMongoClient();
     const db = client.db("blog");
 
     // 生成 slug（如果未提供）
@@ -235,7 +235,7 @@ export async function PUT(req: Request) {
 
   try {
     const body = await req.json();
-    const client = await clientPromise;
+    const client = await getMongoClient();
     const db = client.db("blog");
 
     if (!body._id)
@@ -308,7 +308,7 @@ export async function DELETE(req: Request) {
         { status: 400 }
       );
 
-    const client = await clientPromise;
+    const client = await getMongoClient();
     const db = client.db("blog");
 
     const result = await db

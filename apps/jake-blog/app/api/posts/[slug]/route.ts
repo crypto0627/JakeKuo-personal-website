@@ -1,4 +1,4 @@
-import clientPromise from "@/lib/mongodb";
+import { getMongoClient } from "@/lib/mongodb";
 import { type WithId } from "mongodb";
 import { NextResponse } from "next/server";
 import type { Post } from "@/types/post";
@@ -29,7 +29,7 @@ export async function GET(
 ) {
   try {
     const { slug } = await params;
-    const client = await clientPromise;
+    const client = await getMongoClient();
     const db = client.db("blog");
 
     const postResult = await db
@@ -74,7 +74,7 @@ export async function PATCH(
 ) {
   try {
     const { slug } = await params;
-    const client = await clientPromise;
+    const client = await getMongoClient();
     const db = client.db("blog");
 
     const result = await db

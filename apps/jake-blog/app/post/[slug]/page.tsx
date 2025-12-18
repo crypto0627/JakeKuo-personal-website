@@ -1,5 +1,5 @@
 import { notFound } from 'next/navigation';
-import clientPromise from '@/lib/mongodb';
+import { getMongoClient } from '@/lib/mongodb';
 import { type WithId } from 'mongodb';
 import type { Post } from '@/types/post';
 import Image from 'next/image';
@@ -24,7 +24,7 @@ function serializePost(doc: WithId<Post>): Post {
 
 async function getPost(slug: string): Promise<Post | null> {
   try {
-    const client = await clientPromise;
+    const client = await getMongoClient();
     const db = client.db('blog');
 
     // 先檢查文章是否存在（包括未發布的，用於調試）

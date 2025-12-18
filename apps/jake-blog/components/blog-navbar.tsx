@@ -2,7 +2,6 @@
 
 import Link from 'next/link';
 import { Zap } from 'lucide-react';
-import { useState, useEffect } from 'react';
 
 interface BlogNavbarProps {
   tags: string[];
