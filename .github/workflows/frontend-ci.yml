@@ -1,4 +1,4 @@
-name: Deploy Frontend
+name: Build Frontend Apps
 
 on:
   push:
@@ -8,22 +8,31 @@ on:
 
 jobs:
   build-frontend:
-    name: Build Frontend
-    timeout-minutes: 15
+    name: Build Frontend (${{ matrix.app }})
     runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    strategy:
+      matrix:
+        app:
+          - personal-web
+          - jake-blog
+
+    env:
+      DATABASE_URI: ${{ secrets.DATABASE_URI }}
+      ADMIN_API_KEY: ${{ secrets.ADMIN_API_KEY }}
+      JWT_SECRET: ${{ secrets.JWT_SECRET }}
 
     steps:
       - name: Check out code
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 2
 
       - name: Setup PNPM
         uses: pnpm/action-setup@v3
         with:
           version: 8
 
-      - name: Setup Node.js environment
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
@@ -32,6 +41,6 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
-      - name: Build frontend
+      - name: Build app
         run: pnpm run build
-        working-directory: apps/personal-web
+        working-directory: apps/${{ matrix.app }}
