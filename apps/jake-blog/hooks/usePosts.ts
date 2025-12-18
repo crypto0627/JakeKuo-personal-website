@@ -26,7 +26,12 @@ export function usePosts() {
         throw new Error('Failed to fetch posts');
       }
       const data = await res.json();
-      setPosts(data || []);
+      const posts = Array.isArray(data)
+        ? data
+        : Array.isArray(data?.posts)
+        ? data.posts
+        : [];
+      setPosts(posts as ClientPost[]);
     } catch (err) {
       console.error(err);
       setError(err instanceof Error ? err.message : 'Failed to fetch posts');

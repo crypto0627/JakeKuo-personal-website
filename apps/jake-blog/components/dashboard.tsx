@@ -42,7 +42,12 @@ export default function DashboardPage() {
       const res = await fetch('/api/posts');
       if (res.ok) {
         const data = await res.json();
-        setPosts(data);
+        const posts = Array.isArray(data)
+          ? data
+          : Array.isArray(data?.posts)
+          ? data.posts
+          : [];
+        setPosts(posts as ClientPost[]);
       }
     } catch (error) {
       console.error('Error fetching posts:', error);
