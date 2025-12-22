@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { Plus, Edit, Trash, X, Save } from 'lucide-react';
 import { usePosts } from '@/hooks/usePosts';
 import type { ClientPost } from '@/hooks/usePosts';
+import Loading from './loading';
 
 interface PostFormData {
   title: string;
@@ -12,7 +13,6 @@ interface PostFormData {
   excerpt: string;
   published: boolean;
   tags: string[];
-  coverImage: string;
 }
 
 export default function PostPage() {
@@ -25,7 +25,6 @@ export default function PostPage() {
     excerpt: '',
     published: false,
     tags: [],
-    coverImage: '',
   });
   const [tagInput, setTagInput] = useState('');
   const [error, setError] = useState<string | null>(null);
@@ -78,7 +77,6 @@ export default function PostPage() {
       excerpt: '',
       published: false,
       tags: [],
-      coverImage: '',
     });
     setEditingPost(null);
     setError(null);
@@ -94,7 +92,6 @@ export default function PostPage() {
       excerpt: post.excerpt,
       published: post.published,
       tags: post.tags || [],
-      coverImage: post.coverImage || '',
     });
     setError(null);
     setSuccess(null);
@@ -229,17 +226,6 @@ export default function PostPage() {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-black/70 mb-1">封面圖片 URL</label>
-            <input
-              type="url"
-              value={formData.coverImage}
-              onChange={(e) => setFormData({ ...formData, coverImage: e.target.value })}
-              className="w-full p-3 border border-black/10 rounded-lg bg-white/70 text-black/80 focus:outline-none focus:ring-2 focus:ring-[#f6d365]/50"
-              placeholder="https://..."
-            />
-          </div>
-
-          <div>
             <label className="block text-sm font-medium text-black/70 mb-1">標籤</label>
             <div className="flex gap-2 mb-2">
               <input
@@ -331,7 +317,7 @@ export default function PostPage() {
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold text-black/85 mb-4">文章列表</h2>
         {loading ? (
-          <div className="text-center py-8 text-black/50">載入中...</div>
+          <Loading />
         ) : posts.length === 0 ? (
           <div className="text-center py-8 text-black/50">尚無文章</div>
         ) : (

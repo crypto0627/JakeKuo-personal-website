@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { Search, Eye, Heart, FileText, FileCheck, FileX } from 'lucide-react';
 import type { ClientPost } from '@/hooks/usePosts';
+import Loading from './loading';
 
 interface Stats {
   totalPosts: number;
@@ -56,7 +57,7 @@ export default function DashboardPage() {
     }
   };
 
-  const filteredPosts = posts.filter((post) =>
+  const filteredPosts = posts.filter((post: ClientPost) =>
     post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
     post.slug.toLowerCase().includes(searchQuery.toLowerCase()) ||
     post.tags.some((tag) => tag.toLowerCase().includes(searchQuery.toLowerCase()))
@@ -138,11 +139,11 @@ export default function DashboardPage() {
       {/* Posts List */}
       <div className="space-y-4">
         {loading ? (
-          <div className="text-center py-8 text-black/50">載入中...</div>
+          <Loading />
         ) : filteredPosts.length === 0 ? (
           <div className="text-center py-8 text-black/50">沒有找到文章</div>
         ) : (
-          filteredPosts.map((post) => (
+          filteredPosts.map((post: ClientPost) => (
             <div
               key={post._id}
               onClick={() => setSelectedPost(selectedPost?._id === post._id ? null : post)}
@@ -166,7 +167,7 @@ export default function DashboardPage() {
                   </div>
                   {post.tags && post.tags.length > 0 && (
                     <div className="flex flex-wrap gap-2 mt-2">
-                      {post.tags.map((tag) => (
+                      {post.tags.map((tag: string) => (
                         <span
                           key={tag}
                           className="px-2 py-1 bg-[#f6d365]/30 text-black/70 text-xs rounded-full"
@@ -186,19 +187,6 @@ export default function DashboardPage() {
                     <p><strong>Slug:</strong> {post.slug}</p>
                     <p><strong>建立時間:</strong> {new Date(post.createdAt).toLocaleString('zh-TW')}</p>
                     <p><strong>更新時間:</strong> {new Date(post.updatedAt).toLocaleString('zh-TW')}</p>
-                    {post.coverImage && (
-                      <div>
-                        <strong>封面圖片:</strong>
-                        <img src={post.coverImage} alt={post.title} className="mt-2 max-w-xs rounded-lg" />
-                      </div>
-                    )}
-                    <div>
-                      <strong>內容預覽:</strong>
-                      <div
-                        className="mt-2 p-3 bg-white/30 rounded-lg max-h-40 overflow-y-auto"
-                        dangerouslySetInnerHTML={{ __html: post.content.substring(0, 500) + '...' }}
-                      />
-                    </div>
                   </div>
                 </div>
               )}

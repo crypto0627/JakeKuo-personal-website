@@ -13,7 +13,6 @@ function serializePost(doc: WithId<Post>): Post {
     excerpt: doc.excerpt,
     published: doc.published,
     tags: doc.tags || [],
-    coverImage: doc.coverImage,
     likes: doc.likes || 0,
     views: doc.views || 0,
     createdAt: doc.createdAt,

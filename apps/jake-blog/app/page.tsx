@@ -2,9 +2,9 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
 import { BlogNavbar } from '@/components/blog-navbar';
 import { Eye, Heart, Calendar } from 'lucide-react';
+import Loading from '@/components/loading';
 
 interface Post {
   _id: string;
@@ -14,7 +14,6 @@ interface Post {
   excerpt: string;
   published: boolean;
   tags: string[];
-  coverImage?: string;
   likes: number;
   views: number;
   createdAt: string;
@@ -104,7 +103,7 @@ export default function Home() {
 
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {loading ? (
-          <div className="text-center py-16 text-black/50">載入中...</div>
+          <Loading />
         ) : posts.length === 0 ? (
           <div className="text-center py-16 text-black/50">尚無文章</div>
         ) : (
@@ -118,20 +117,6 @@ export default function Home() {
                   href={`/post/${post.slug}`}
                   className="group bg-white/50 backdrop-blur-xl rounded-xl border border-black/10 shadow-md overflow-hidden hover:shadow-lg transition-all hover:-translate-y-1"
                 >
-                  {/* Cover Image */}
-                  {post.coverImage ? (
-                    <div className="relative w-full h-48 overflow-hidden">
-                      <Image
-                        src={post.coverImage}
-                        alt={post.title}
-                        fill
-                        className="object-cover group-hover:scale-105 transition-transform duration-300"
-                      />
-                    </div>
-                  ) : (
-                    <div className="w-full h-48 bg-linear-to-br from-[#f6d365] to-[#fda085] opacity-50" />
-                  )}
-
                   {/* Content */}
                   <div className="p-6">
                     <h2 className="text-xl font-semibold text-black/90 mb-2 group-hover:text-[#f6d365] transition-colors line-clamp-2">

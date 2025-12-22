@@ -67,7 +67,6 @@ export function usePosts() {
     excerpt?: string;
     published?: boolean;
     tags?: string[];
-    coverImage?: string;
   }) => {
     try {
       const res = await fetch('/api/posts', {
@@ -104,7 +103,6 @@ export function usePosts() {
       excerpt?: string;
       published?: boolean;
       tags?: string[];
-      coverImage?: string;
     }
   ) => {
     try {

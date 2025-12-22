@@ -8,7 +8,6 @@ export interface Post {
   excerpt: string;
   published: boolean;
   tags: string[];
-  coverImage?: string;
   likes: number;
   views: number;
   createdAt: Date;
@@ -25,7 +24,6 @@ export interface Post {
 //   "createdAt": "2025-01-01T12:00:00.000Z",
 //   "updatedAt": "2025-01-02T08:30:00.000Z",
 //   "tags": ["nextjs", "frontend", "blog"],
-//   "coverImage": "https://...",
 //   "likes": 120,
 //   "views": 3500
 // }

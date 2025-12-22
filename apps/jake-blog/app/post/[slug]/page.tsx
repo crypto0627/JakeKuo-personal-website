@@ -3,7 +3,6 @@ import Link from 'next/link';
 import { getMongoClient } from '@/lib/mongodb';
 import { type WithId } from 'mongodb';
 import type { Post } from '@/types/post';
-import Image from 'next/image';
 import { ArrowLeft } from 'lucide-react';
 
 // 將 MongoDB 文檔轉換為 Post 型別
@@ -16,7 +15,6 @@ function serializePost(doc: WithId<Post>): Post {
     excerpt: doc.excerpt,
     published: doc.published,
     tags: doc.tags || [],
-    coverImage: doc.coverImage,
     likes: doc.likes || 0,
     views: doc.views || 0,
     createdAt: doc.createdAt,
@@ -116,20 +114,6 @@ export default async function PostPage({
               ))}
             </div>
           )}
-
-          {/* Cover Image */}
-          {post.coverImage && (
-            <div className="relative w-full h-64 md:h-96 mb-8 rounded-xl overflow-hidden border border-black/10 shadow-lg">
-              <Image
-                src={post.coverImage}
-                alt={post.title}
-                fill
-                className="object-cover"
-                priority
-              />
-            </div>
-          )}
-
           {/* Excerpt */}
           {post.excerpt && (
             <p className="text-lg text-black/80 italic mb-8 border-l-4 border-[#f6d365] pl-4">

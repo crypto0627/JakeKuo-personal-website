@@ -33,7 +33,6 @@ function serializePost(doc: WithId<Post>): Post {
     excerpt: doc.excerpt,
     published: doc.published,
     tags: doc.tags || [],
-    coverImage: doc.coverImage,
     likes: doc.likes || 0,
     views: doc.views || 0,
     createdAt: doc.createdAt,
@@ -156,7 +155,6 @@ export async function POST(req: Request) {
       excerpt: body.excerpt || "",
       published: body.published ?? false,
       tags: Array.isArray(body.tags) ? body.tags : [],
-      coverImage: body.coverImage || undefined,
       likes: 0,
       views: 0,
       createdAt: now,
@@ -253,7 +251,6 @@ export async function PUT(req: Request) {
     if (body.excerpt !== undefined) updateData.excerpt = body.excerpt;
     if (body.published !== undefined) updateData.published = body.published;
     if (body.tags !== undefined) updateData.tags = body.tags;
-    if (body.coverImage !== undefined) updateData.coverImage = body.coverImage;
 
     // 可選：更新 slug
     if (body.title) {
