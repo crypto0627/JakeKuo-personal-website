@@ -6,10 +6,10 @@ const options = {
     strict: true,
     deprecationErrors: true,
   },
-  maxPoolSize: 10,
-  minPoolSize: 1,
+  maxPoolSize: 5,
+  minPoolSize: 0,
   maxIdleTimeMS: 30000,
-  connectTimeoutMS: 10000,
+  connectTimeoutMS: 30000,
   socketTimeoutMS: 45000,
 };
 
