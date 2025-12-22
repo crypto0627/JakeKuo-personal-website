@@ -1,8 +1,10 @@
 import { notFound } from 'next/navigation';
+import Link from 'next/link';
 import { getMongoClient } from '@/lib/mongodb';
 import { type WithId } from 'mongodb';
 import type { Post } from '@/types/post';
 import Image from 'next/image';
+import { ArrowLeft } from 'lucide-react';
 
 // 將 MongoDB 文檔轉換為 Post 型別
 function serializePost(doc: WithId<Post>): Post {
@@ -27,39 +29,25 @@ async function getPost(slug: string): Promise<Post | null> {
     const client = await getMongoClient();
     const db = client.db('blog');
 
-    // 先檢查文章是否存在（包括未發布的，用於調試）
-    const postExists = await db.collection<Post>('posts').findOne({ slug });
-    
-    if (!postExists) {
-      console.log(`Post with slug "${slug}" not found in database`);
-      return null;
-    }
-
-    if (!postExists.published) {
-      console.log(`Post with slug "${slug}" exists but is not published`);
-      return null;
-    }
-
-    const postResult = await db
+    // 先更新 views
+    await db
       .collection<Post>('posts')
-      .findOneAndUpdate(
+      .updateOne(
         { slug, published: true },
-        { $inc: { views: 1 } },
-        { returnDocument: 'after' }
+        { $inc: { views: 1 } }
       );
 
-    // findOneAndUpdate returns ModifyResult which has a 'value' property
-    const post = (postResult as unknown as { value: WithId<Post> | null })
-      .value;
+    // 重新查詢獲取更新後的數據
+    const updatedPost = await db
+      .collection<Post>('posts')
+      .findOne({ slug, published: true });
 
-    if (!post) {
-      console.log(`Post with slug "${slug}" found but update failed`);
+    if (!updatedPost) {
       return null;
     }
-
-    return serializePost(post);
+    return serializePost(updatedPost as WithId<Post>);
   } catch (error) {
-    console.error('Error fetching post:', error);
+    console.error('[getPost] ❌ Error fetching post:', error);
     return null;
   }
 }
@@ -69,7 +57,7 @@ export default async function PostPage({
 }: {
   params: Promise<{ slug: string }>;
 }) {
-  const { slug } = await params;
+  const { slug } = await params;  
   const post = await getPost(slug);
 
   if (!post) {
@@ -87,6 +75,15 @@ export default async function PostPage({
   return (
     <div className="min-h-screen bg-linear-to-br from-[#e2e4e6] via-[#faf7f0] to-[#fce8b1]">
       <article className="max-w-4xl mx-auto px-6 py-16">
+        {/* Back Button */}
+        <Link
+          href="/"
+          className="inline-flex items-center gap-2 mb-6 px-4 py-2 bg-white/50 backdrop-blur-xl rounded-xl border border-black/10 shadow-md hover:shadow-lg hover:bg-white/70 transition-all text-black/80 hover:text-black/90 group"
+        >
+          <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
+          <span className="text-sm font-medium">返回主頁</span>
+        </Link>
+
         {/* Header */}
         <header className="mb-8">
           <h1 className="text-4xl md:text-5xl font-bold text-black/90 mb-4">
