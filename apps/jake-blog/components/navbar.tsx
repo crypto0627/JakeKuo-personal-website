@@ -1,9 +1,10 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { Power, Zap, Menu, X, User } from "lucide-react";
+import { Power, Zap, Menu, X, User, Github, Network } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { MobileMenu } from "./mobile-menu";
+import Link from "next/link";
 
 interface NavbarProps {
   isSidebarOpen: boolean;
@@ -66,13 +67,9 @@ export function Navbar({ isSidebarOpen, toggleSidebar }: NavbarProps) {
               <h1 className="text-lg lg:text-2xl font-bold text-black/85">
                 JakeKuo Blog
               </h1>
-              <p className="text-black/50 text-xs lg:text-sm">
-                POST Dashboard
-              </p>
             </div>
           </div>
         </div>
-
         {/* 右側 - 用戶信息和登出 */}
         <div className="flex items-center space-x-2 lg:space-x-4">
           {/* 用戶信息 - 桌面版 */}

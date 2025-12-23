@@ -1,17 +1,10 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Inter, Orbitron } from "next/font/google";
 import "./globals.css";
 import { FullscreenButton } from "@/components/fullscreen-button";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+const inter = Inter({subsets: ['latin'], variable: '--font-inter'});
+const orbitron = Orbitron({subsets: ['latin'], variable: '--font-orbitron'});
 
 export const metadata: Metadata = {
   title: "JakeKuo Blog",
@@ -26,7 +19,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${inter.variable} ${orbitron.variable} font-sans antialiased`}
       >
         {children}
         <FullscreenButton />

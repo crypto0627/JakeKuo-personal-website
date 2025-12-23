@@ -1,36 +1,27 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+<div align="center">
+<h1>Blog</h1>
 
-## Getting Started
+<img src="./public/JakeKuo.png" width="50%" height="50%"></img>
 
-First, run the development server:
+</div>
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+# Description
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Use to record my posts with software technical:
+- vercel: cloud app deployment place -> locate in HongKong
+- nextjs: fullstackk app framework
+- cloudflare: domain DNS record
+- mongodb atlas: noSQL online db -> locate in HongKong
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+# Technical problem
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- Prod使用MongoDB Atlas + Vervel serverless -> cold start + 跨州網路延遲
+- Server components 每次Click都要打MongoDB -> 首頻等待TTFB
+- prefetch沒生效，導致UX很慢
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+# 優化方向
+- 使用ISR: Nextjs -> export const revalidate = 300; // 5 分鐘
+- 將「增加view」的操作拆到async的fire-and-forgot
+- 確保MongoDB client可以global用，不需要每次操作都連，減少cold start SSL handshake
+- 調整mongodb connectTimeoutMS、maxPoolSize避免超時
+- 

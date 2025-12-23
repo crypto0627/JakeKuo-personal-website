@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { Zap } from 'lucide-react';
+import { Github, Globe, Network, Zap } from 'lucide-react';
 
 interface BlogNavbarProps {
   tags: string[];
@@ -23,7 +23,15 @@ export function BlogNavbar({ tags, selectedTag, onTagSelect }: BlogNavbarProps) 
               JakeKuo Blog
             </h1>
           </Link>
-
+          { /* Social media icons */}
+        <div className="flex items-center space-x-2 lg:space-x-4">
+          <Link href="https://github.com/crypto0627" target="_blank">
+            <Github className="w-4 h-4 text-black/50 lg:w-5 lg:h-5 group-hover:text-blue-500 transition-colors" />
+          </Link>
+          <Link href="https://www.jakekuo.com/" target="_blank">
+            <Globe className="w-4 h-4 text-black/50 lg:w-5 lg:h-5 group-hover:text-blue-500 transition-colors" />
+          </Link>
+        </div>
           {/* Tags */}
           <div className="flex flex-wrap items-center gap-2">
             <button
