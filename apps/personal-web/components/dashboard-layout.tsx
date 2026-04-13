@@ -31,7 +31,7 @@ const ModalContext = createContext<ModalContextType>({
 export const useModal = () => useContext(ModalContext);
 
 export function DashboardLayout({ children }: { children: React.ReactNode }) {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const isMobile = useIsMobile();
   const pathname = usePathname();
@@ -40,8 +40,6 @@ export function DashboardLayout({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     if (isMobile) {
       setIsSidebarOpen(false);
-    } else {
-      setIsSidebarOpen(true);
     }
   }, [isMobile]);
 
@@ -178,8 +176,7 @@ export function DashboardLayout({ children }: { children: React.ReactNode }) {
       <ModalContext.Provider value={{ isModalOpen, setIsModalOpen }}>
         <main
           className={cn(
-            "flex-1 transition-all duration-300 ease-in-out",
-            isSidebarOpen && !isMobile ? "ml-64" : "ml-0",
+            "flex-1 transition-all duration-300 ease-in-out md:ml-64",
             isModalOpen ? "overflow-hidden" : "overflow-y-auto",
           )}
         >
