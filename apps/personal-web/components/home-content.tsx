@@ -281,21 +281,6 @@ export function HomeContent() {
             </CardContent>
           </Card>
 
-          <Card className="rounded-3xl border border-primary/20 bg-black/60 backdrop-blur-sm overflow-hidden">
-            <CardContent className="p-6">
-              <h3 className="text-xl font-bold mb-4 text-primary glow-text">
-                My Blog
-              </h3>
-              <Link href="https://blog.jakekuo.com/" target="_blank" className="w-full">
-                <Button
-                  variant="outline"
-                  className="rounded-3xl border-accent/30 hover:border-accent w-full"
-                >
-                  <Send className="mr-2 h-4 w-4" /> Jake Blog
-                </Button>
-              </Link>
-            </CardContent>
-          </Card>
         </div>
 
         {/* Right Column - Portfolio */}
