@@ -150,7 +150,6 @@ export function HomeContent() {
             </h1>
             <h2 className="text-2xl md:text-3xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-primary via-secondary to-accent text-center md:text-left">
               Energy FullStack Engineer
-              Energy FullStack Engineer
             </h2>
             <p className="text-lg text-muted-foreground mb-8 text-center md:text-left">
               I’m a full-stack engineer with experience building
@@ -183,7 +182,6 @@ export function HomeContent() {
                     variant="outline"
                     className="bg-primary/10 text-primary border-primary/30"
                   >
-                    React.js/Next.js/Node.js
                     React.js/Next.js/Node.js
                   </Badge>
                   <Badge

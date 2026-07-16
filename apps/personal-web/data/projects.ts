@@ -9,7 +9,7 @@ export const featuredProjects: Project[] = [
     tags: ["Fullstack development", "ms level data integration", "energy site"],
     image:
       "https://ivory-awake-falcon-554.mypinata.cloud/ipfs/bafybeif34yoffwpv4sjeasvdssxfelvmvwakjfz6wrl7tox4ifvzm3kyy4",
-    github: "",
+    github: "#",
     demo: "https://behind-ess.fortune-ess.com.tw/",
   },
   {
@@ -40,7 +40,7 @@ export const allProjects: Project[] = [
       "Docker Compose",
       "Cloudflare Proxy",
     ],
-    image: "https://www.fortune-ess.com.tw/images/logo01.png",
+    image: "#",
     github: "#",
     demo: "https://www.fortune-ess.com.tw/",
   },
