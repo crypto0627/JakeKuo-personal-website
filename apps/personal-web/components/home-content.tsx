@@ -1,17 +1,13 @@
 "use client";
 
 import { useState } from "react";
-import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Github, Linkedin, Send } from "lucide-react";
 import { CyberAvatar } from "@/components/ui/cyber-avatar";
-import { StatsBar } from "@/components/ui/stats-bar";
 import { ProjectCard } from "@/components/project-card";
 import { allProjects } from "@/data/projects";
-import { allProjects } from "@/data/projects";
-import { RESUME_LANGUAGES, type ResumeLanguage } from "@/data/resume-languages";
 import Link from "next/link";
 
 export function HomeContent() {
@@ -262,7 +258,6 @@ export function HomeContent() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {allProjects.map((project) => (
             {allProjects.map((project) => (
               <ProjectCard key={project.id} project={project} />
             ))}
