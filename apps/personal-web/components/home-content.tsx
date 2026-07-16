@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -8,6 +9,7 @@ import { Github, Linkedin, Send } from "lucide-react";
 import { CyberAvatar } from "@/components/ui/cyber-avatar";
 import { StatsBar } from "@/components/ui/stats-bar";
 import { ProjectCard } from "@/components/project-card";
+import { allProjects } from "@/data/projects";
 import { allProjects } from "@/data/projects";
 import { RESUME_LANGUAGES, type ResumeLanguage } from "@/data/resume-languages";
 import Link from "next/link";
@@ -152,6 +154,7 @@ export function HomeContent() {
             </h1>
             <h2 className="text-2xl md:text-3xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-primary via-secondary to-accent text-center md:text-left">
               Energy FullStack Engineer
+              Energy FullStack Engineer
             </h2>
             <p className="text-lg text-muted-foreground mb-8 text-center md:text-left">
               I’m a full-stack engineer with experience building
@@ -178,12 +181,13 @@ export function HomeContent() {
                     variant="outline"
                     className="bg-secondary/10 text-secondary border-secondary/30"
                   >
-                    Typescript/HTML/CSS/JavaScript/Tailwindcss
+                    Typescript/HTML/CSS/JavaScript/Tailwind
                   </Badge>
                   <Badge
                     variant="outline"
                     className="bg-primary/10 text-primary border-primary/30"
                   >
+                    React.js/Next.js/Node.js
                     React.js/Next.js/Node.js
                   </Badge>
                   <Badge
@@ -258,6 +262,7 @@ export function HomeContent() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {allProjects.map((project) => (
             {allProjects.map((project) => (
               <ProjectCard key={project.id} project={project} />
             ))}
