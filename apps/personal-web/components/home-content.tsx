@@ -176,7 +176,7 @@ export function HomeContent() {
                     variant="outline"
                     className="bg-secondary/10 text-secondary border-secondary/30"
                   >
-                    Typescript/HTML/CSS/JavaScript/Tailwind
+                    Web-development
                   </Badge>
                   <Badge
                     variant="outline"

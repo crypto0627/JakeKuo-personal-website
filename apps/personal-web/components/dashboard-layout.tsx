@@ -84,7 +84,7 @@ export function DashboardLayout({ children }: { children: React.ReactNode }) {
               Jake Kuo
             </h2>
             <p className="text-xs text-center text-muted-foreground">
-              XuoDAO Builder Team
+              Fortune electric
             </p>
             <p className="text-xs text-center text-muted-foreground">
               Fullstack engineer
