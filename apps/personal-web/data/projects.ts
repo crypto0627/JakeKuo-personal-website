@@ -33,14 +33,13 @@ export const allProjects: Project[] = [
     description:
       "Fortune Electric advances localized energy storage solutions to lower costs and boost efficiency, supporting green industry and energy transition through strategic partnerships and large-scale renewable energy projects.",
     tags: [
-      "HTML",
-      "CSS",
-      "JavaScript",
+      "Next.js",
+      "Tailwindcss",
+      "Typescript",
       "Nginx",
       "Docker Compose",
-      "Cloudflare Proxy",
     ],
-    image: "#",
+    image: "https://ivory-awake-falcon-554.mypinata.cloud/ipfs/bafybeib5nt5ycmpvmaywpc4un7xxem7ia5c6s43ndrdpvlmmufrwef2n2i",
     github: "#",
     demo: "https://www.fortune-ess.com.tw/",
   },
