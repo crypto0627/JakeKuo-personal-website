@@ -122,7 +122,7 @@ export const home: Localized<HomeDictionary> = {
     organizationLabel: "組織",
     role: "能源產業全端工程師",
     intro:
-      "我是一名全端工程師，具備開發正式上線的網頁應用程式、即時監控儀表板與區塊鏈系統的經驗。我專注於打造穩定可靠的產品、持續優化效能，並與設計師、產品經理及跨部門團隊保持清楚的溝通。期待加入國際團隊，一起把產品做得更好。",
+      "我是一名全端工程師，具備開發正式上線的網頁應用程式、即時監控儀表板與區塊鏈系統的經驗。我專注於打造穩定可靠的產品、持續優化效能，並與設計師、產品經理及跨部門團隊保持清楚的溝通。",
     topSkills: "核心技能",
     skills: [
       "網頁開發",
@@ -142,7 +142,7 @@ export const home: Localized<HomeDictionary> = {
     organizationLabel: "Organization",
     role: "Energy FullStack Engineer",
     intro:
-      "I’m a full-stack engineer with experience building production-grade web applications, real-time dashboards, and blockchain-based systems. I focus on creating reliable products, improving performance, and communicating clearly with designers, product managers, and cross-functional teams. I’m excited to join an international team and contribute to products.",
+      "I’m a full-stack engineer with experience building production-grade web applications, real-time dashboards, and blockchain-based systems. I focus on creating reliable products, improving performance, and communicating clearly with designers, product managers, and cross-functional teams.",
     topSkills: "Top Skills",
     skills: [
       "Web-development",
