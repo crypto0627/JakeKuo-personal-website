@@ -1,14 +1,8 @@
 import type React from "react";
-import {
-  Home,
-  User,
-  Briefcase,
-  Code2,
-  GraduationCap,
-  Trophy,
-} from "lucide-react";
+import { User, Briefcase, GraduationCap, Trophy } from "lucide-react";
 
 export interface NavItem {
+  /** English label; the rendered label is looked up by `href` in `nav` (lib/i18n). */
   title: string;
   href: string;
   icon: React.ElementType;

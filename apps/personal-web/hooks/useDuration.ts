@@ -1,4 +1,5 @@
 import { useMemo } from "react";
+import { DEFAULT_LOCALE, type Locale } from "@/lib/i18n";
 
 interface Duration {
   years: number;
@@ -71,12 +72,23 @@ export function useDuration(period: string): Duration | null {
 /**
  * Format duration to human readable string
  * @param duration - Duration object
- * @returns Formatted string like "2 years 3 months 15 days"
+ * @param locale - Locale used for the unit labels
+ * @returns Formatted string like "2 years 3 months 15 days" / "2 年 3 個月 15 天"
  */
-export function formatDuration(duration: Duration | null): string {
+export function formatDuration(
+  duration: Duration | null,
+  locale: Locale = DEFAULT_LOCALE,
+): string {
   if (!duration) return "";
 
   const parts: string[] = [];
+
+  if (locale === "zh-TW") {
+    if (duration.years > 0) parts.push(`${duration.years} 年`);
+    if (duration.months > 0) parts.push(`${duration.months} 個月`);
+    if (duration.days > 0) parts.push(`${duration.days} 天`);
+    return parts.length === 0 ? "不到 1 天" : parts.join(" ");
+  }
 
   if (duration.years > 0) {
     parts.push(`${duration.years} year${duration.years > 1 ? "s" : ""}`);

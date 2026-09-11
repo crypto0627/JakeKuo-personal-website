@@ -1,97 +1,176 @@
+"use client";
+
 import Image from "next/image";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Briefcase, Calendar } from "lucide-react";
 import { useDuration, formatDuration } from "@/hooks/useDuration";
+import { useLanguage } from "@/components/language-provider";
+import { common, experience as dict, type Localized } from "@/lib/i18n";
 
 interface Experience {
   id: number;
-  role: string;
-  company: string;
+  role: Localized<string>;
+  company: Localized<string>;
   companyLogo?: string;
+  /** Parsed for the duration badge, so the "Present" sentinel stays in English. */
   period: string;
-  description: string;
-  achievements: string[];
-  technologies: string[];
+  description: Localized<string>;
+  achievements: Localized<string[]>;
+  technologies: Localized<string[]>;
 }
 
 const experiences: Experience[] = [
   {
     id: 1,
-    role: "Full Stack Engineer",
-    company: "Fortune Electric",
+    role: { "zh-TW": "全端工程師", en: "Full Stack Engineer" },
+    company: { "zh-TW": "華城電機", en: "Fortune Electric" },
     companyLogo: "https://www.fortune.com.tw/en/images/about/logo-xs.png",
     period: "2025/2/4 - Present",
-    description:
-      "Leading the development of a next-generation Energy Storage and Management System (EMS) for industrial applications, integrating real-time data visualization, smart scheduling, and secure control interfaces.",
-    achievements: [
-      "Integrated frontend and backend systems with a unified data flow, enabling real-time monitoring, smart scheduling, and secure control in the EMS microservice architecture.",
-      "Led the end-to-end planning, design, and development of the department's official website, EMS, and SCADA systems; established knowledge management platforms by integrating GitHub, open-source projects (e.g., BookStack), and Notion-based KM systems; implemented comprehensive software engineering processes and CI/CD pipelines.",
-      "Developed a dashboard demo for solar energy storage scheduling and behind-the-meter energy storage management.",
-    ],
-    technologies: [
-      "TypeScript",
-      "React19/Vue3/Next.js",
-      "Node.js/Express",
-      "Tailwindcss",
-      "Model Context Protocol",
-      "Microservice",
-      "Docker/Docker Compose/Kubernetes/Helm",
-      "ORM",
-      "SQL/NoSQL",
-      "HTML/CSS/JavaScript",
-    ],
+    description: {
+      "zh-TW":
+        "主導新一代工業級儲能與能源管理系統（EMS）的開發，整合即時資料視覺化、智慧排程與安全控制介面。",
+      en: "Leading the development of a next-generation Energy Storage and Management System (EMS) for industrial applications, integrating real-time data visualization, smart scheduling, and secure control interfaces.",
+    },
+    achievements: {
+      "zh-TW": [
+        "在 EMS 微服務架構中整合前後端系統並統一資料流，實現即時監控、智慧排程與安全控制。",
+        "主導部門官方網站、EMS 與 SCADA 系統從規劃、設計到開發的完整流程；整合 GitHub、開源專案（如 BookStack）與 Notion 建置知識管理平台；導入完整的軟體工程流程與 CI/CD pipeline。",
+        "開發太陽能儲能排程與表後儲能管理的儀表板 Demo。",
+      ],
+      en: [
+        "Integrated frontend and backend systems with a unified data flow, enabling real-time monitoring, smart scheduling, and secure control in the EMS microservice architecture.",
+        "Led the end-to-end planning, design, and development of the department's official website, EMS, and SCADA systems; established knowledge management platforms by integrating GitHub, open-source projects (e.g., BookStack), and Notion-based KM systems; implemented comprehensive software engineering processes and CI/CD pipelines.",
+        "Developed a dashboard demo for solar energy storage scheduling and behind-the-meter energy storage management.",
+      ],
+    },
+    technologies: {
+      "zh-TW": [
+        "TypeScript",
+        "React19/Vue3/Next.js",
+        "Node.js/Express",
+        "Tailwindcss",
+        "Model Context Protocol",
+        "微服務架構",
+        "Docker/Docker Compose/Kubernetes/Helm",
+        "ORM",
+        "SQL/NoSQL",
+        "HTML/CSS/JavaScript",
+      ],
+      en: [
+        "TypeScript",
+        "React19/Vue3/Next.js",
+        "Node.js/Express",
+        "Tailwindcss",
+        "Model Context Protocol",
+        "Microservice",
+        "Docker/Docker Compose/Kubernetes/Helm",
+        "ORM",
+        "SQL/NoSQL",
+        "HTML/CSS/JavaScript",
+      ],
+    },
   },
   {
     id: 2,
-    role: "Contributor & Frontend Engineer",
-    company: "XueDAO",
+    role: {
+      "zh-TW": "貢獻者暨前端工程師",
+      en: "Contributor & Frontend Engineer",
+    },
+    company: { "zh-TW": "XueDAO", en: "XueDAO" },
     companyLogo:
       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcStzTKhmOh_ucV2UZ68TGgcKogdPC5gLHhvrA&s",
     period: "2024/4/15 - Present",
-    description:
-      "Contributed to Web3 education and open-source development by building community tools, organizing workshops, and participating in hackathons to empower blockchain learners in Taiwan.",
-    achievements: [
-      "Developed and maintained the official XueDAO website.",
-      "Co-organized and facilitated Web3 hackathons and workshops for students and early-stage developers.",
-      "Participated in 10+ Web3 hackathons and workshops, expanding the organization's visibility.",
-    ],
-    technologies: [
-      "Web3.js/Ether.js/Wagmi",
-      "Wallet Provider",
-      "Remix/Hardhat IDE",
-      "Alchemy/Infura RPC",
-      "IPFS",
-      "Solidity",
-      "ERC-20 721 1155",
-    ],
+    description: {
+      "zh-TW":
+        "透過打造社群工具、舉辦工作坊與參與黑客松，投入 Web3 教育與開源開發，協助台灣的區塊鏈學習者成長。",
+      en: "Contributed to Web3 education and open-source development by building community tools, organizing workshops, and participating in hackathons to empower blockchain learners in Taiwan.",
+    },
+    achievements: {
+      "zh-TW": [
+        "開發並維護 XueDAO 官方網站。",
+        "共同籌辦並帶領面向學生與初階開發者的 Web3 黑客松與工作坊。",
+        "參與超過 10 場 Web3 黑客松與工作坊，提升組織能見度。",
+      ],
+      en: [
+        "Developed and maintained the official XueDAO website.",
+        "Co-organized and facilitated Web3 hackathons and workshops for students and early-stage developers.",
+        "Participated in 10+ Web3 hackathons and workshops, expanding the organization's visibility.",
+      ],
+    },
+    technologies: {
+      "zh-TW": [
+        "Web3.js/Ether.js/Wagmi",
+        "錢包 Provider",
+        "Remix/Hardhat IDE",
+        "Alchemy/Infura RPC",
+        "IPFS",
+        "Solidity",
+        "ERC-20 721 1155",
+      ],
+      en: [
+        "Web3.js/Ether.js/Wagmi",
+        "Wallet Provider",
+        "Remix/Hardhat IDE",
+        "Alchemy/Infura RPC",
+        "IPFS",
+        "Solidity",
+        "ERC-20 721 1155",
+      ],
+    },
   },
   {
     id: 3,
-    role: "Blockchain Research Developer Intern",
-    company: "Cathay Financial Holdings",
+    role: {
+      "zh-TW": "區塊鏈研究開發實習生",
+      en: "Blockchain Research Developer Intern",
+    },
+    company: { "zh-TW": "國泰金融控股", en: "Cathay Financial Holdings" },
     companyLogo:
       "https://media.licdn.com/dms/image/v2/C4D0BAQHf8hdm_7CuuA/company-logo_200_200/company-logo_200_200/0/1631304615081?e=2147483647&v=beta&t=rb-Bn_koGJFExASCrFoyJJs-NEFYlJZvgYI3xxZohWg",
     period: "2023/7/5 - 2024/2/23",
-    description:
-      "Worked on blockchain R&D and frontend development projects, focusing on usability, performance, and integrating Web3 technologies into enterprise-grade applications.",
-    achievements: [
-      "Optimized frontend performance by resolving UI stutter and flickering issues, refactoring asynchronous API logic, and applying lazy loading and debouncing techniques.",
-      "Built a command-line dashboard tool with React Ink for managing Ethereum Quorum nodes and Docker-based blockchain infrastructure for financial institutions.",
-      "Conducted blockchain feasibility studies (Bitcoin, Ethereum, HyperLedger Fabric) for enterprise financial use cases.",
-    ],
-    technologies: [
-      "Blockchain research",
-      "Bitcoin",
-      "Ethereum",
-      "Hyperledger Fabric",
-      "React Ink app",
-      "Cloudflare",
-    ],
+    description: {
+      "zh-TW":
+        "投入區塊鏈研發與前端開發專案，聚焦易用性、效能優化，以及將 Web3 技術導入企業級應用。",
+      en: "Worked on blockchain R&D and frontend development projects, focusing on usability, performance, and integrating Web3 technologies into enterprise-grade applications.",
+    },
+    achievements: {
+      "zh-TW": [
+        "修正 UI 卡頓與閃爍問題、重構非同步 API 邏輯，並導入 lazy loading 與 debounce，優化前端效能。",
+        "以 React Ink 打造命令列儀表板工具，用於管理金融機構的 Ethereum Quorum 節點與 Docker 區塊鏈基礎架構。",
+        "針對企業金融應用場景，進行 Bitcoin、Ethereum、Hyperledger Fabric 的區塊鏈可行性研究。",
+      ],
+      en: [
+        "Optimized frontend performance by resolving UI stutter and flickering issues, refactoring asynchronous API logic, and applying lazy loading and debouncing techniques.",
+        "Built a command-line dashboard tool with React Ink for managing Ethereum Quorum nodes and Docker-based blockchain infrastructure for financial institutions.",
+        "Conducted blockchain feasibility studies (Bitcoin, Ethereum, HyperLedger Fabric) for enterprise financial use cases.",
+      ],
+    },
+    technologies: {
+      "zh-TW": [
+        "區塊鏈研究",
+        "Bitcoin",
+        "Ethereum",
+        "Hyperledger Fabric",
+        "React Ink 應用",
+        "Cloudflare",
+      ],
+      en: [
+        "Blockchain research",
+        "Bitcoin",
+        "Ethereum",
+        "Hyperledger Fabric",
+        "React Ink app",
+        "Cloudflare",
+      ],
+    },
   },
 ];
 
 export function ExperienceContent() {
+  const { locale } = useLanguage();
+  const t = dict[locale];
+
   return (
     <div className="space-y-8">
       <div className="flex items-center space-x-4">
@@ -99,10 +178,8 @@ export function ExperienceContent() {
           <Briefcase className="h-6 w-6 text-primary" />
         </div>
         <div>
-          <h1 className="text-3xl font-bold">Professional Experience</h1>
-          <p className="text-muted-foreground">
-            My career journey in Energy and Blockchain development
-          </p>
+          <h1 className="text-3xl font-bold">{t.heading}</h1>
+          <p className="text-muted-foreground">{t.subheading}</p>
         </div>
       </div>
 
@@ -121,7 +198,7 @@ export function ExperienceContent() {
                       <div className="relative h-20 w-20">
                         <Image
                           src={exp.companyLogo}
-                          alt={`${exp.company} logo`}
+                          alt={`${exp.company[locale]} logo`}
                           fill
                           className="object-contain p-1"
                           sizes="40px"
@@ -129,8 +206,12 @@ export function ExperienceContent() {
                       </div>
                     )}
                     <div>
-                      <CardTitle className="text-xl">{exp.role}</CardTitle>
-                      <p className="text-primary font-medium">{exp.company}</p>
+                      <CardTitle className="text-xl">
+                        {exp.role[locale]}
+                      </CardTitle>
+                      <p className="text-primary font-medium">
+                        {exp.company[locale]}
+                      </p>
                     </div>
                   </div>
                   <div className="flex flex-col items-start md:items-end text-muted-foreground">
@@ -150,27 +231,27 @@ export function ExperienceContent() {
                             }
                             return str;
                           }
-                          return `${formatDate(start)} - ${end === "Present" ? "Present" : formatDate(end)}`;
+                          return `${formatDate(start)} - ${end === "Present" ? common[locale].present : formatDate(end)}`;
                         })()}
                       </span>
                     </div>
                     {duration && (
                       <span className="text-xs mt-1">
-                        {formatDuration(duration)}
+                        {formatDuration(duration, locale)}
                       </span>
                     )}
                   </div>
                 </div>
               </CardHeader>
               <CardContent className="pt-4">
-                <p className="mb-4">{exp.description}</p>
+                <p className="mb-4">{exp.description[locale]}</p>
 
                 <div className="mb-4">
                   <h4 className="text-sm font-medium text-muted-foreground mb-2">
-                    Key Achievements
+                    {t.keyAchievements}
                   </h4>
                   <ul className="space-y-2">
-                    {exp.achievements.map((achievement, index) => (
+                    {exp.achievements[locale].map((achievement, index) => (
                       <li key={index} className="flex items-start space-x-2">
                         <div className="h-2 w-2 rounded-full bg-primary mt-2"></div>
                         <span className="flex-1">{achievement}</span>
@@ -181,10 +262,10 @@ export function ExperienceContent() {
 
                 <div>
                   <h4 className="text-sm font-medium text-muted-foreground mb-2">
-                    Technologies
+                    {t.technologies}
                   </h4>
                   <div className="flex flex-wrap gap-2">
-                    {exp.technologies.map((tech, index) => (
+                    {exp.technologies[locale].map((tech, index) => (
                       <Badge
                         key={index}
                         variant="outline"

@@ -9,8 +9,20 @@ import { CyberAvatar } from "@/components/ui/cyber-avatar";
 import { ProjectCard } from "@/components/project-card";
 import { allProjects } from "@/data/projects";
 import Link from "next/link";
+import { useLanguage } from "@/components/language-provider";
+import { home } from "@/lib/i18n";
+
+// Badge accent used for each entry of the localized skills list.
+const SKILL_STYLES = [
+  "bg-secondary/10 text-secondary border-secondary/30",
+  "bg-primary/10 text-primary border-primary/30",
+  "bg-accent/10 text-accent border-accent/30",
+];
 
 export function HomeContent() {
+  const { locale } = useLanguage();
+  const t = home[locale];
+
   // Track which badge is hovered: "none" | "company" | "organization"
   const [hovered, setHovered] = useState<"none" | "company" | "organization">(
     "none",
@@ -38,7 +50,7 @@ export function HomeContent() {
                 transition: "opacity 0.2s",
               }}
             >
-              View on Ethereum
+              {t.avatarTooltip}
             </span>
             <div
               className="
@@ -78,7 +90,7 @@ export function HomeContent() {
                       >
                         <path d="M10 2a6 6 0 016 6c0 4.418-6 10-6 10S4 12.418 4 8a6 6 0 016-6zm0 8a2 2 0 100-4 2 2 0 000 4z" />
                       </svg>
-                      Company
+                      {t.companyLabel}
                     </span>
                     <div className="flex-1 flex justify-end">
                       <Badge
@@ -123,7 +135,7 @@ export function HomeContent() {
                           clipRule="evenodd"
                         />
                       </svg>
-                      Organization
+                      {t.organizationLabel}
                     </span>
                     <div className="flex-1 flex justify-end">
                       <Badge
@@ -149,15 +161,10 @@ export function HomeContent() {
               </span>
             </h1>
             <h2 className="text-2xl md:text-3xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-primary via-secondary to-accent text-center md:text-left">
-              Energy FullStack Engineer
+              {t.role}
             </h2>
             <p className="text-lg text-muted-foreground mb-8 text-center md:text-left">
-              I’m a full-stack engineer with experience building
-              production-grade web applications, real-time dashboards, and
-              blockchain-based systems. I focus on creating reliable products,
-              improving performance, and communicating clearly with designers,
-              product managers, and cross-functional teams. I’m excited to join
-              an international team and contribute to products.
+              {t.intro}
             </p>
           </div>
         </div>
@@ -170,32 +177,17 @@ export function HomeContent() {
           <Card className="rounded-3xl border border-primary/20 bg-black/60 backdrop-blur-sm overflow-hidden">
             <CardContent className="p-6">
               <div className="border-primary/20">
-                <h4 className="text-lg font-bold mb-3">Top Skills</h4>
+                <h4 className="text-lg font-bold mb-3">{t.topSkills}</h4>
                 <div className="flex flex-wrap gap-2">
-                  <Badge
-                    variant="outline"
-                    className="bg-secondary/10 text-secondary border-secondary/30"
-                  >
-                    Web-development
-                  </Badge>
-                  <Badge
-                    variant="outline"
-                    className="bg-primary/10 text-primary border-primary/30"
-                  >
-                    React.js/Next.js/Node.js
-                  </Badge>
-                  <Badge
-                    variant="outline"
-                    className="bg-accent/10 text-accent border-accent/30"
-                  >
-                    Web3.js/Ether.js/Wagmi
-                  </Badge>
-                  <Badge
-                    variant="outline"
-                    className="bg-secondary/10 text-secondary border-secondary/30"
-                  >
-                    Docker/Git
-                  </Badge>
+                  {t.skills.map((skill, i) => (
+                    <Badge
+                      key={skill}
+                      variant="outline"
+                      className={SKILL_STYLES[i % SKILL_STYLES.length]}
+                    >
+                      {skill}
+                    </Badge>
+                  ))}
                 </div>
               </div>
             </CardContent>
@@ -204,7 +196,7 @@ export function HomeContent() {
           <Card className="rounded-3xl border border-primary/20 bg-black/60 backdrop-blur-sm overflow-hidden">
             <CardContent className="p-6">
               <h3 className="text-xl font-bold mb-4 text-primary glow-text">
-                Connect
+                {t.connect}
               </h3>
               <div className="grid grid-cols-2 gap-3">
                 <Link
@@ -246,13 +238,12 @@ export function HomeContent() {
               </div>
             </CardContent>
           </Card>
-
         </div>
 
         {/* Right Column - Portfolio */}
         <div className="lg:col-span-2 space-y-6">
           <div className="flex items-center justify-between mb-4">
-            <h2 className="text-2xl font-bold text-white">Portfolio</h2>
+            <h2 className="text-2xl font-bold text-white">{t.portfolio}</h2>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

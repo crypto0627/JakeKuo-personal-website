@@ -16,6 +16,9 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { navItems } from "@/data/navigation";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { useLanguage } from "@/components/language-provider";
+import { LanguageToggle } from "@/components/ui/language-toggle";
+import { nav, sidebar } from "@/lib/i18n";
 
 // Context for modal state
 interface ModalContextType {
@@ -35,6 +38,9 @@ export function DashboardLayout({ children }: { children: React.ReactNode }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const isMobile = useIsMobile();
   const pathname = usePathname();
+  const { locale } = useLanguage();
+  const t = sidebar[locale];
+  const navLabels = nav[locale];
   const sidebarRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -54,6 +60,7 @@ export function DashboardLayout({ children }: { children: React.ReactNode }) {
         variant="ghost"
         size="icon"
         onClick={toggleSidebar}
+        aria-label={isSidebarOpen ? t.closeMenu : t.openMenu}
         className="fixed top-4 left-4 z-50 md:hidden bg-background/80 backdrop-blur-sm border border-primary/20 rounded-full p-2 glow"
       >
         {isSidebarOpen ? (
@@ -62,6 +69,9 @@ export function DashboardLayout({ children }: { children: React.ReactNode }) {
           <Menu className="h-5 w-5" />
         )}
       </Button>
+
+      {/* Language switcher — visible on every page */}
+      <LanguageToggle className="fixed top-4 right-4 z-50" />
 
       {/* Sidebar */}
       <div
@@ -84,10 +94,10 @@ export function DashboardLayout({ children }: { children: React.ReactNode }) {
               Jake Kuo
             </h2>
             <p className="text-xs text-center text-muted-foreground">
-              Fortune electric
+              {t.company}
             </p>
             <p className="text-xs text-center text-muted-foreground">
-              Fullstack engineer
+              {t.role}
             </p>
             <div className="flex justify-center mt-3 space-x-2">
               <Link
@@ -98,11 +108,11 @@ export function DashboardLayout({ children }: { children: React.ReactNode }) {
                   variant="outline"
                   size="icon"
                   className="rounded-full h-8 w-8 bg-muted/50 border-primary/30 hover:border-primary group"
-                  title="View on Etherscan"
+                  title={t.etherscanTooltip}
                 >
                   <Wallet className="h-4 w-4" />
                   <span className="absolute -top-8 bg-black/80 backdrop-blur-sm px-2 py-1 rounded-md text-xs text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity duration-200 border border-primary/20 glow-text">
-                    View on Etherscan
+                    {t.etherscanTooltip}
                   </span>
                 </Button>
               </Link>
@@ -112,11 +122,11 @@ export function DashboardLayout({ children }: { children: React.ReactNode }) {
                   variant="outline"
                   size="icon"
                   className="rounded-full h-8 w-8 bg-muted/50 border-secondary/30 hover:border-secondary group"
-                  title="Send Email"
+                  title={t.emailTooltip}
                 >
                   <Mail className="h-4 w-4" />
                   <span className="absolute -top-8 bg-black/80 backdrop-blur-sm px-2 py-1 rounded-md text-xs text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity duration-200 border border-secondary/20 glow-text">
-                    Send Email
+                    {t.emailTooltip}
                   </span>
                 </Button>
               </Link>
@@ -125,7 +135,7 @@ export function DashboardLayout({ children }: { children: React.ReactNode }) {
               <a
                 href="mailto:jake0627a1@gmail.com"
                 className="text-primary hover:underline"
-                title="Mail me"
+                title={t.mailMeTitle}
               >
                 jake0627a1@gmail.com
               </a>
@@ -146,7 +156,7 @@ export function DashboardLayout({ children }: { children: React.ReactNode }) {
                 )}
               >
                 <item.icon className="mr-3 h-5 w-5" />
-                <span>{item.title}</span>
+                <span>{navLabels[item.href] ?? item.title}</span>
                 {pathname === item.href && (
                   <div className="ml-auto w-2 h-2 rounded-full bg-primary animate-pulse"></div>
                 )}
@@ -157,7 +167,7 @@ export function DashboardLayout({ children }: { children: React.ReactNode }) {
           {/* Footer */}
           <div className="p-4 border-t border-primary/20 mb-10 lg:mb-0">
             <div className="text-xs text-center text-muted-foreground">
-              <p>© 2025 JakeKuo All right reserved.</p>
+              <p>{t.copyright}</p>
             </div>
           </div>
         </div>
