@@ -168,6 +168,14 @@ export function DashboardLayout({ children }: { children: React.ReactNode }) {
           <div className="p-4 border-t border-primary/20 mb-10 lg:mb-0">
             <div className="text-xs text-center text-muted-foreground">
               <p>{t.copyright}</p>
+              <div className="flex justify-center gap-3 mt-2">
+                <Link href="/privacy" className="hover:text-primary">
+                  {t.privacy}
+                </Link>
+                <Link href="/terms" className="hover:text-primary">
+                  {t.terms}
+                </Link>
+              </div>
             </div>
           </div>
         </div>

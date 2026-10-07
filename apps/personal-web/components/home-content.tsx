@@ -4,15 +4,22 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Github, Linkedin, Send } from "lucide-react";
+import { ArrowRight, Github, Linkedin, Send, Trophy } from "lucide-react";
 import { CyberAvatar } from "@/components/ui/cyber-avatar";
 import { ProjectCard } from "@/components/project-card";
-import { allProjects } from "@/data/projects";
+import { CaseStudyCard } from "@/components/case-study-card";
+import { SystemArchitecture } from "@/components/system-architecture";
+import {
+  emsCaseStudy,
+  experimentProjects,
+  featuredProjects,
+} from "@/data/projects";
+import { achievements } from "@/data/achievements";
 import Link from "next/link";
 import { useLanguage } from "@/components/language-provider";
 import { home } from "@/lib/i18n";
 
-// Badge accent used for each entry of the localized skills list.
+// Badge accent used for each skill group.
 const SKILL_STYLES = [
   "bg-secondary/10 text-secondary border-secondary/30",
   "bg-primary/10 text-primary border-primary/30",
@@ -160,11 +167,17 @@ export function HomeContent() {
                 Jake Kuo 郭來鴻
               </span>
             </h1>
-            <h2 className="text-2xl md:text-3xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-primary via-secondary to-accent text-center md:text-left">
+            <h2 className="text-2xl md:text-3xl font-bold mb-3 bg-clip-text text-transparent bg-gradient-to-r from-primary via-secondary to-accent text-center md:text-left">
               {t.role}
             </h2>
-            <p className="text-lg text-muted-foreground mb-8 text-center md:text-left">
+            <p className="text-base md:text-lg font-semibold text-white mb-6 text-center md:text-left">
+              {t.tagline}
+            </p>
+            <p className="text-sm md:text-base leading-relaxed whitespace-pre-line text-muted-foreground mb-4 text-center md:text-left">
               {t.intro}
+            </p>
+            <p className="text-sm md:text-base leading-relaxed text-primary border-l-2 border-primary/50 pl-3 mb-8 text-left">
+              {t.focus}
             </p>
           </div>
         </div>
@@ -175,21 +188,60 @@ export function HomeContent() {
         {/* Left Column - Quick Stats */}
         <div className="lg:col-span-1 space-y-6">
           <Card className="rounded-3xl border border-primary/20 bg-black/60 backdrop-blur-sm overflow-hidden">
-            <CardContent className="p-6">
-              <div className="border-primary/20">
-                <h4 className="text-lg font-bold mb-3">{t.topSkills}</h4>
-                <div className="flex flex-wrap gap-2">
-                  {t.skills.map((skill, i) => (
-                    <Badge
-                      key={skill}
-                      variant="outline"
-                      className={SKILL_STYLES[i % SKILL_STYLES.length]}
-                    >
-                      {skill}
-                    </Badge>
-                  ))}
+            <CardContent className="p-6 space-y-4">
+              <h3 className="text-xl font-bold text-primary glow-text">
+                {t.capabilities}
+              </h3>
+              {t.skillGroups.map((group, i) => (
+                <div key={group.title}>
+                  <h4 className="text-sm font-semibold text-white mb-2">
+                    {group.title}
+                  </h4>
+                  <div className="flex flex-wrap gap-1.5">
+                    {group.items.map((item) => (
+                      <Badge
+                        key={item}
+                        variant="outline"
+                        className={`text-xs ${SKILL_STYLES[i % SKILL_STYLES.length]}`}
+                      >
+                        {item}
+                      </Badge>
+                    ))}
+                  </div>
                 </div>
-              </div>
+              ))}
+            </CardContent>
+          </Card>
+
+          <Card className="rounded-3xl border border-primary/20 bg-black/60 backdrop-blur-sm overflow-hidden">
+            <CardContent className="p-6">
+              <h3 className="text-xl font-bold mb-1 text-primary glow-text">
+                {t.selectedAchievements}
+              </h3>
+              <p className="text-xs text-muted-foreground mb-4">
+                {t.achievementsCount}
+              </p>
+              <ul className="space-y-3 mb-4">
+                {achievements.map((a) => (
+                  <li key={a.id} className="flex items-start gap-2 text-sm">
+                    <Trophy className="h-4 w-4 mt-0.5 shrink-0 text-accent" />
+                    <span>
+                      <span className="text-white">{a.year[locale]}</span>
+                      <span className="text-muted-foreground">
+                        {" "}
+                        · {a.category[locale]}
+                      </span>
+                    </span>
+                  </li>
+                ))}
+              </ul>
+              <Link
+                href="/achievements"
+                className="inline-flex items-center text-sm text-primary hover:underline"
+              >
+                {t.viewAllAchievements}
+                <ArrowRight className="ml-1 h-4 w-4" />
+              </Link>
             </CardContent>
           </Card>
 
@@ -240,17 +292,31 @@ export function HomeContent() {
           </Card>
         </div>
 
-        {/* Right Column - Portfolio */}
-        <div className="lg:col-span-2 space-y-6">
-          <div className="flex items-center justify-between mb-4">
-            <h2 className="text-2xl font-bold text-white">{t.portfolio}</h2>
-          </div>
+        {/* Right Column - Architecture & Portfolio */}
+        <div className="lg:col-span-2 space-y-8">
+          <SystemArchitecture
+            title={t.architecture}
+            caption={t.architectureCaption}
+          />
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {allProjects.map((project) => (
-              <ProjectCard key={project.id} project={project} />
-            ))}
-          </div>
+          <section className="space-y-6">
+            <h2 className="text-2xl font-bold text-white">{t.featuredWork}</h2>
+            <CaseStudyCard study={emsCaseStudy} />
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {featuredProjects.map((project) => (
+                <ProjectCard key={project.id} project={project} />
+              ))}
+            </div>
+          </section>
+
+          <section className="space-y-6">
+            <h2 className="text-2xl font-bold text-white">{t.experiments}</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {experimentProjects.map((project) => (
+                <ProjectCard key={project.id} project={project} />
+              ))}
+            </div>
+          </section>
         </div>
       </div>
     </div>
